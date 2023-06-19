@@ -1,0 +1,134 @@
+[
+  {
+    "slug": "westworld",
+    "title": "Westworld",
+    "music_by": ["ramin-djawadi"],
+    "media": "https://youtu.be/rYelEUVQ50g"
+  },
+  {
+    "slug": "game-of-thrones",
+    "title": "Game of Thrones",
+    "music_by": ["ramin-djawadi"],
+    "media": "https://youtu.be/TZE9gVF1QbA"
+  },
+  {
+    "slug": "inception",
+    "title": "Inception",
+    "music_by": ["hans-zimmer"],
+    "media": "https://youtu.be/c56t7upa8Bk"
+  },
+  {
+    "slug": "the-peripheral",
+    "title": "The Peripheral",
+    "music_by": ["mark-korven"],
+    "media": "https://youtu.be/xQHGQhOtMZg"
+  },
+  {
+    "slug": "the-matrix-clubbed-to-death",
+    "title": "The Matrix - Clubbed to death",
+    "music_by": ["rob-dougan"],
+    "media": "https://youtu.be/pFS4zYWxzNA"
+  },
+  {
+    "slug": "the-100",
+    "title": "The 100",
+    "music_by": ["evan-frankfort"],
+    "media": "https://youtu.be/CIvUnfNiUXI"
+  },
+  {
+    "slug": "the-last-emperor",
+    "title": "The Last Emperor",
+    "music_by": ["ryuichi-sakamoto"],
+    "media": "https://youtu.be/fTtCXTry0DU"
+  },
+  {
+    "slug": "princess-mononoke",
+    "title": "Princess Mononoke",
+    "music_by": ["joe-hisaishi"],
+    "media": "https://youtu.be/nBADF1LdP3g"
+  },
+  {
+    "slug": "X files",
+    "title": "x-files",
+    "music_by": [""],
+    "media": ""
+  },
+  {
+    "slug": "into-the-badlands",
+    "title": "Into the Badlands",
+    "music_by": ["mike-shinoda"],
+    "media": "https://youtu.be/zSyZK2g23QA"
+  },
+  {
+    "slug": "peaky-blinders-red-right-hand",
+    "title": "Peaky Blinders - Red Right Hand (2011 Remaster)",
+    "music_by": ["nick-cave-and-the-bad-seeds"],
+    "media": "https://youtu.be/4VJSjsW7JIA"
+  },
+  {
+    "slug": "buffy-the-vampire-slayer",
+    "title": "Buffy the Vampire Slayer",
+    "music_by": ["nerf-herder"],
+    "media": "https://youtu.be/8y8nJjPxeCc"
+  },
+  {
+    "slug": "interstellar",
+    "title": "Interstellar",
+    "music_by": ["hans-zimmer"],
+    "media": "https://youtu.be/kpz8lpoLvrA"
+  },
+  {
+    "slug": "dune-ripples-in-the-sand",
+    "title": "Dune - Ripples in the sand",
+    "music_by": ["hans-zimmer"],
+    "media": "https://youtu.be/AgzE2TeXCl0"
+  },
+  {
+    "slug": "tenet-posterity",
+    "title": "Tenet - Posterity",
+    "music_by": ["ludwig-göransson"],
+    "media": "https://youtu.be/ZE5zXLOyEOQ"
+  },
+  {
+    "slug": "oppenheimer",
+    "title": "Oppenheimer",
+    "music_by": ["ludwig-göransson"],
+    "media": "https://youtu.be/2ivWvZGbfFE"
+  },
+  {
+    "slug": "dunkirk-the-mole",
+    "title": "Dunkirk - The mole",
+    "music_by": ["hans-zimmer"],
+    "media": "https://youtu.be/wlXjP59jZCM"
+  },
+  {
+    "slug": "oblivion",
+    "title": "Oblivion",
+    "music_by": ["m83"],
+    "media": "hhttps://youtu.be/UjpbQ1OWMPE"
+  },
+  {
+    "slug": "stranger-things",
+    "title": "Stranger Things",
+    "music_by": ["kyle-dixon", "michael-stein"],
+    "media": "https://youtu.be/-RcPZdihrp4"
+  },
+  {
+    "slug": "james-bond-skyfall",
+    "title": "James Bond - Skyfall",
+    "music_by": ["adele"],
+    "media": "https://youtu.be/DeumyOzKqgI"
+  },
+  {
+    "slug": "james-bond-no-time-to-die",
+    "title": "James Bond - No Time To Die",
+    "music_by": ["billie-eilish"],
+    "media": "https://youtu.be/7hSzcYndaYw"
+  },
+  {
+    "slug": "james-bond-spectre",
+    "title": "James Bond - Spectre",
+    "music_by": ["sam-smith"],
+    "media": "https://youtu.be/G9LxUQL_Ucg"
+  }
+]
