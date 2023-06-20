@@ -1,8 +1,7 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
 const fs = require("fs");
-
-const api_version = '/v1'
+const { paginator, api_version } = require('./utils');
 
 function readfiles(file) {
   let data = fs.readFileSync(__dirname + `/db/${file}.json`, "utf8");
@@ -18,12 +17,16 @@ function build(opts = {}) {
 
   // Fetch titles
   app.get(`${api_version}/titles`, async (request, reply) => {
-    const { q } = request.query
+    const { q, page, per_page } = request.query
     if (q) {
       const querieddata = titles.filter(title => title.title.toLowerCase().includes(q.toLowerCase()))
-      reply.code(200).send({ data: querieddata })
+      const result = paginator(querieddata, page, per_page)
+      reply.code(200).send(result)
     }
-    else reply.code(200).send({ data: titles })
+    else {
+      const result = paginator(titles, page, per_page)
+      reply.code(200).send(result)
+    }
   })
 
   // fetch a title
@@ -38,7 +41,16 @@ function build(opts = {}) {
 
   // fetch composers
   app.get(`${api_version}/composers`, async (request, reply) => {
-    reply.code(200).send({ data: readfiles('composers') })
+    const { q, page, per_page } = request.query
+    if (q) {
+      const querieddata = composers.filter(title => title.name.toLowerCase().includes(q.toLowerCase()))
+      const result = paginator(querieddata, page, per_page)
+      reply.code(200).send(result)
+    }
+    else {
+      const result = paginator(composers, page, per_page)
+      reply.code(200).send(result)
+    }
   })
 
   // fetch a composer
@@ -54,7 +66,8 @@ function build(opts = {}) {
   // fetch composer's titles
   app.get(`${api_version}/composers/:slug/titles`, async (request, reply) => {
     const findtitles = titles.filter(title => title.music_by.includes(request.params.slug))
-    reply.code(200).send({ data: findtitles })
+    const result = paginator(findtitles, 1, 10)
+    reply.code(200).send(result)
   })
 
   return app
