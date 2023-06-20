@@ -35,7 +35,7 @@ This project was built using nodejs and fastify. Data are kept in the [titles.js
 
 ## Contributing
 
-To learn more about contributing to NigeriaLogos, please read [contributing.md](contributing.md)
+To learn more about contributing to OST API, please read [contributing.md](contributing.md)
 
 ## Maintainer
 
