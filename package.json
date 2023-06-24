@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --coverage --watchAll"
+    "test": "jest --coverage --watchAll",
+    "test:build": "jest"
   },
   "repository": {
     "type": "git",
