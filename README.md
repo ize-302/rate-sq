@@ -24,13 +24,13 @@ This project was built using nodejs and fastify. Data are kept in the [titles.js
 ## API Routes
 
 ```
-| Description                         | Request                      | query strings         |
-|-------------------------------------|:----------------------------:|----------------------:|
-| Fetch all titles                    | /v1/titles                   | q, per_page, page     |
-| Fetch a title                       | /v1/titles/:slug             | -                     |
-| Fetch all composers                 | /v1/composers                | q, per_page, page     |
-| Fetch a composer                    | /v1/composers/:slug          | -                     |
-| Fetch titles by composer            | /v1/composers/:slug/titles   | -                     |
+| Description                         | Request                          | query strings         |
+|-------------------------------------|:--------------------------------:|----------------------:|
+| Fetch all titles                    | /api/v1/titles                   | q, per_page, page     |
+| Fetch a title                       | /api/v1/titles/:slug             | -                     |
+| Fetch all composers                 | /api/v1/composers                | q, per_page, page     |
+| Fetch a composer                    | /api/v1/composers/:slug          | -                     |
+| Fetch titles by composer            | /api/v1/composers/:slug/titles   | -                     |
 ```
 
 ## Contributing
