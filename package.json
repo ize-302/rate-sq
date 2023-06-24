@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage --watchAll",
-    "test:build": "jest"
+    "test:ci": "jest"
   },
   "repository": {
     "type": "git",
