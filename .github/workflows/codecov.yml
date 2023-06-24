@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.5.3
 
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -23,10 +23,10 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm run test:build
+        run: npm run test:ci
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: lcov.info
+        # uses: codecov/codecov-action@v1
+        # with:
+        # token: ${{ secrets.CODECOV_TOKEN }}
