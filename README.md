@@ -1,6 +1,6 @@
 # <center>OST-API
 
-# <center> [![codecov](https://codecov.io/gh/ize-302/ost-api/branch/master/graph/badge.svg?token=BQ116RI0Q2)](https://codecov.io/gh/ize-302/ost-api)
+### <center> [![codecov](https://codecov.io/gh/ize-302/ost-api/branch/master/graph/badge.svg?token=BQ116RI0Q2)](https://codecov.io/gh/ize-302/ost-api)
 
 ## Introduction
 
