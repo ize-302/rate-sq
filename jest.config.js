@@ -6,5 +6,8 @@ module.exports = {
     "^@/pages(.*)$": "<rootDir>/pages/$1",
     "^@/components(.*)$": "<rootDir>/components/$1",
   },
+  transform: {
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
+  }
   // Other configs
 }
