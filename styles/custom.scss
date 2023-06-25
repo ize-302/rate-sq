@@ -6,3 +6,10 @@
 ul {
   list-style-type: inherit;
 }
+
+.mantine-TextInput-input,
+.mantine-PasswordInput-input,
+.mantine-Button-root {
+  height: 40px;
+  border-color: rgb(210, 210, 210);
+}

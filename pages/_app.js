@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }) {
         }}
         withNormalizeCSS
       >
-        <Notifications position="top-right" containerWidth={350} />
+        <Notifications position="top-center" containerWidth={350} />
         <Component {...pageProps} />
       </MantineProvider>
     </SessionContextProvider>

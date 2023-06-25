@@ -4,33 +4,37 @@ import AuthLayout from './components/layouts/Auth.layout';
 import Link from 'next/link';
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
-import { IconX } from "@tabler/icons-react";
+import { IconX, IconCheck } from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import axios from 'axios'
-import { saveTokenInCookies } from '@/utils/cookies.utils';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/utils/constants';
 
-export default function Login() {
+export default function CreateAccount() {
   const [loading, setloading] = React.useState(false);
   const router = useRouter()
   const form = useForm({
     initialValues: {
       email: "",
+      display_name: "",
       password: ""
     },
     validate: {
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Invalid email",
+      display_name: (value) => value ? null : "Provide a display name",
       password: (value) => value ? null : "Provide a password"
     },
   });
 
-  const handleLogin = async () => {
+  const handleAccountCreation = async () => {
     setloading(true);
-    axios.post('/api/v1/auth/login', form.values).then(response => {
+    axios.post('/api/v1/auth/signup', form.values).then(response => {
       setloading(false);
-      saveTokenInCookies(ACCESS_TOKEN, response.data.access_token)
-      saveTokenInCookies(REFRESH_TOKEN, response.data.refresh_token)
+      notifications.show({
+        title: response.data.message,
+        message: "",
+        color: "green",
+        icon: <IconCheck />,
+      });
       router.push('/')
     }).catch(err => {
       setloading(false);
@@ -44,9 +48,9 @@ export default function Login() {
     })
   }
 
-  return <AuthLayout header={'Log in'}>
-    <form className="space-y-6" onSubmit={form.onSubmit(() => handleLogin())}>
-      <div>
+  return <AuthLayout header={'Create account'}>
+    <form className="space-y-6" onSubmit={form.onSubmit(() => handleAccountCreation())}>
+      <div className='border-b border-gray-200 mb-5 pb-5'>
         <TextInput
           placeholder="Your email"
           label="Email address"
@@ -54,6 +58,17 @@ export default function Login() {
           type='email'
           disabled={loading}
           {...form.getInputProps("email")}
+        />
+      </div>
+
+      <div>
+        <TextInput
+          placeholder="Display name"
+          label="Display name"
+          withAsterisk
+          type='text'
+          disabled={loading}
+          {...form.getInputProps("display_name")}
         />
       </div>
 
@@ -67,14 +82,15 @@ export default function Login() {
         />
       </div>
 
-      <Button type='submit' loading={loading} className='bg-black w-full'>
-        Login
+      <Button loading={loading}
+        type='submit' className='bg-black w-full'>
+        Create account
       </Button>
     </form>
 
     <p className="mt-10 text-center text-sm text-gray-500">
-      Dont have an account? {" "}
-      <Link href="/create-account" className="font-semibold leading-6">Create an account</Link>
+      Already have an account? {" "}
+      <Link href="/login" className="font-semibold leading-6">Login</Link>
     </p>
   </AuthLayout>
 }
