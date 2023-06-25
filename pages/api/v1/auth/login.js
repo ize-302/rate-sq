@@ -2,7 +2,6 @@ import { supabase } from "@/supabase";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/utils/constants";
 import { generateToken } from "@/utils/jwt.utils";
 import bcrypt from 'bcrypt'
-import jwt from "jsonwebtoken";
 
 export default async function loginHandler(
   req,
@@ -29,7 +28,7 @@ export default async function loginHandler(
       // generate token
       const access_token = generateToken(founduser.data, ACCESS_TOKEN)
       const refresh_token = generateToken(founduser.data, REFRESH_TOKEN)
-      return res.status(201).send({ refresh_token, access_token })
+      return res.status(200).send({ refresh_token, access_token })
     } catch (error) {
       console.log(error)
       return res.status(500).send({ message: 'Something went wrong' })
