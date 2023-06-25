@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput, PasswordInput, Button } from '@mantine/core';
-import AuthLayout from './components/layouts/Auth.layout';
+import AuthLayout from '../components/layouts/Auth.layout';
 import Link from 'next/link';
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
@@ -67,7 +67,7 @@ export default function Login() {
         />
       </div>
 
-      <Button type='submit' loading={loading} className='bg-black w-full'>
+      <Button type='submit' loading={loading} className='bg-primary text-secondary hover:bg-secondary hover:text-primary border-0 rounded-full w-full'>
         Login
       </Button>
     </form>

@@ -1,12 +1,12 @@
 import React from 'react'
 import { TextInput, PasswordInput, Button } from '@mantine/core';
-import AuthLayout from './components/layouts/Auth.layout';
 import Link from 'next/link';
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { IconX, IconCheck } from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import axios from 'axios'
+import AuthLayout from '@/components/layouts/Auth.layout';
 
 export default function CreateAccount() {
   const [loading, setloading] = React.useState(false);
@@ -35,7 +35,7 @@ export default function CreateAccount() {
         color: "green",
         icon: <IconCheck />,
       });
-      router.push('/')
+      router.push('/login')
     }).catch(err => {
       setloading(false);
       console.log(err)
@@ -83,7 +83,7 @@ export default function CreateAccount() {
       </div>
 
       <Button loading={loading}
-        type='submit' className='bg-black w-full'>
+        type='submit' className='bg-primary text-secondary hover:bg-secondary hover:text-primary border-0 rounded-full  w-full'>
         Create account
       </Button>
     </form>

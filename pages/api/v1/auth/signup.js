@@ -21,7 +21,7 @@ export default async function signupHandler(
         { email, display_name, password: hash, salt }
       ]).select("*")
         .single();
-      res.status(201).send({ message: 'Account has been created' })
+      res.status(201).send({ message: 'Account has been created. Log in to continue' })
     } catch (error) {
       console.log(error)
       res.status(500).send({ message: 'Something went wrong' })
