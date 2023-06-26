@@ -9,7 +9,7 @@ describe('/api/v1/search/film', () => {
         query: 'game of thrones'
       }
     });
-    filmSearchHandler(req, res);
+    await filmSearchHandler(req, res);
     expect(res._getStatusCode()).toBe(200);
   })
 });
