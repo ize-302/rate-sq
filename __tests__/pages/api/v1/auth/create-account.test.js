@@ -31,6 +31,9 @@ describe('/api/v1/auth/signup', () => {
         password: 'password'
       }
     });
+    // delete test-user-again@example.com user befroe testing
+    await supabase.from('profiles').delete().eq("email", req.body.email)
+      .single();
     await signupHandler(req, res);
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
