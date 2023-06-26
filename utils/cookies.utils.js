@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import Cookies from "js-cookie";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
 

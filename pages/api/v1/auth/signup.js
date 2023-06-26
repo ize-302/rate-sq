@@ -26,7 +26,7 @@ export default async function signupHandler(
         await supabase.from('profiles').delete().eq("email", email)
           .single();
       }
-      res.status(200).send({ message: 'Account has been created. Log in to continue' })
+      res.status(200).send({ success: 'Account has been created. Log in to continue' })
     } catch (error) {
       console.log(error)
       res.status(500).send({ error: 'Something went wrong' })

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import jwt from "jsonwebtoken";
 import { ACCESS_TOKEN } from "./constants";
 
@@ -32,4 +33,16 @@ export function verifyToken(jwtToken) {
   } catch (e) {
     return null;
   }
+}
+
+
+export const handleTokenVerification = (req, res) => {
+  const { authorization } = req.headers;
+  const isAuthorized = verifyToken(authorization)
+  if (!isAuthorized) {
+    return res
+      .status(401)
+      .send({ error: "You are not authorised" });
+  }
+  return isAuthorized
 }

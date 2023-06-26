@@ -30,7 +30,7 @@ export default function CreateAccount() {
     axios.post('/api/v1/auth/signup', form.values).then(response => {
       setloading(false);
       notifications.show({
-        title: response.data.message,
+        title: response.data.success,
         message: "",
         color: "green",
         icon: <IconCheck />,

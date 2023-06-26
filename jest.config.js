@@ -1,7 +1,6 @@
 module.exports = {
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
   moduleNameMapper: {
-    "^@/db(.*)$": "<rootDir>/db/$1",
     "^@/utils(.*)$": "<rootDir>/utils/$1",
     "^@/pages(.*)$": "<rootDir>/pages/$1",
     "^@/components(.*)$": "<rootDir>/components/$1",
@@ -15,5 +14,4 @@ module.exports = {
   "collectCoverage": true,
   "testMatch": ['**/__tests__/**/*.js'],
   "globalSetup": "<rootDir>/jest.setup.js",
-
 }
