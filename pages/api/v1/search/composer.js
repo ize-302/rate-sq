@@ -11,7 +11,7 @@ export default async function composerSearchHandler(
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
       }
     })
-    res.status(200).send(response.data)
+    return res.status(200).send(response.data)
   } catch (error) {
     console.log(error)
     return res.status(500).send({ error: 'Something went wrong' })

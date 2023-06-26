@@ -15,7 +15,7 @@ export default async function trackHandler(
         .eq("id", id)
         .single();
       if (foundtrack.error) return res.status(404).send({ error: 'Track not found' })
-      res.status(200).send(foundtrack.data)
+      return res.status(200).send(foundtrack.data)
     } catch (error) {
       console.log(error)
       return res.status(500).send({ error: 'Something went wrong' })

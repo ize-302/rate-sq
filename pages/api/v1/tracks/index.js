@@ -16,7 +16,7 @@ export default async function tracksHandler(
         { title, media_path, composers, related_film, added_by: isAuthorized.id }
       ]).select("*")
         .single();
-      res.status(201).send({ success: 'track successfully added' })
+      return res.status(201).send({ success: 'track successfully added' })
     } catch (error) {
       console.log(error)
       return res.status(500).send({ error: 'Something went wrong' })
