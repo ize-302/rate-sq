@@ -18,9 +18,6 @@ export default function Layout({ children }) {
     }
   }, [token])
 
-
-  console.log(user)
-
   return (
     <div className="min-h-screen flex flex-col w-full bg-white">
       <Navigation user={user} />

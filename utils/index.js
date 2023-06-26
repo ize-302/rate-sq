@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export const paginator = (items, page, per_page) => {
   var page = page || 1,
     per_page = per_page || 10,

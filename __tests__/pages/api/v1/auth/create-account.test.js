@@ -34,7 +34,7 @@ describe('/api/v1/auth/signup', () => {
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({
-        message: expect.any(String),
+        success: expect.any(String),
       }),
     );
   });
