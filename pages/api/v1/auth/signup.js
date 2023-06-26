@@ -13,18 +13,18 @@ export default async function signupHandler(
         .select()
         .eq("email", email)
         .single();
-      if (data) return res.status(400).send({ message: 'Account already exist' })
+      if (data) return res.status(409).send({ error: 'Account already exist' })
       // continue 
-      const salt = bcrypt.genSaltSync(16);
-      const hash = bcrypt.hashSync(password, salt);
+      const salt = await bcrypt.genSaltSync(10);
+      const hash = await bcrypt.hashSync(password, salt);
       await supabase.from('profiles').insert([
         { email, display_name, password: hash, salt }
       ]).select("*")
         .single();
-      res.status(201).send({ message: 'Account has been created. Log in to continue' })
+      res.status(200).send({ message: 'Account has been created. Log in to continue' })
     } catch (error) {
       console.log(error)
-      res.status(500).send({ message: 'Something went wrong' })
+      res.status(500).send({ error: 'Something went wrong' })
     }
   }
 }

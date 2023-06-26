@@ -36,7 +36,7 @@ export default function Login() {
       setloading(false);
       console.log(err)
       notifications.show({
-        title: err.response.data.message,
+        title: err.response.data.error,
         message: "",
         color: "red",
         icon: <IconX />,

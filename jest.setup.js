@@ -1,6 +1,6 @@
-import next from 'next'
-next({})
+import { loadEnvConfig } from '@next/env'
 
 export default async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-};
+  const projectDir = process.cwd()
+  loadEnvConfig(projectDir)
+}

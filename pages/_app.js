@@ -1,28 +1,21 @@
 import React from "react";
 import "@/styles/globals.css";
 import "@/styles/custom.scss";
-import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
-import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { RouterTransition } from "@/components/RouterTransition";
 
 export default function App({ Component, pageProps }) {
-  const [supabase] = React.useState(() => createPagesBrowserClient());
-
   return (
-    <SessionContextProvider
-      supabaseClient={supabase}
-      initialSession={pageProps.initialSession}
+    <MantineProvider
+      theme={{
+        fontFamily: "Inter, sans-serif",
+      }}
+      withNormalizeCSS
     >
-      <MantineProvider
-        theme={{
-          fontFamily: "Inter, sans-serif",
-        }}
-        withNormalizeCSS
-      >
-        <Notifications position="top-center" containerWidth={350} />
-        <Component {...pageProps} />
-      </MantineProvider>
-    </SessionContextProvider>
+      <RouterTransition />
+      <Notifications position="top-center" containerWidth={350} />
+      <Component {...pageProps} />
+    </MantineProvider>
   );
 }
