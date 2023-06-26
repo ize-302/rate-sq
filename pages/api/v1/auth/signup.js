@@ -21,12 +21,12 @@ export default async function signupHandler(
         { email, display_name, password: hash, salt }
       ]).select("*")
         .single();
-      res.status(200).send({ message: 'Account has been created. Log in to continue' })
       // delete test-user-again@example.com user after testing
       if (email === 'test-user-again@example.com') {
         await supabase.from('profiles').delete().eq("email", email)
           .single();
       }
+      res.status(200).send({ message: 'Account has been created. Log in to continue' })
     } catch (error) {
       console.log(error)
       res.status(500).send({ error: 'Something went wrong' })
