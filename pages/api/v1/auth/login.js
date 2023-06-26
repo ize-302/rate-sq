@@ -15,23 +15,24 @@ export default async function loginHandler(
         .select()
         .eq("email", email)
         .single();
-      if (!founduser.data) return res.status(404).send({ message: 'Account does not exist' })
+      const errorMessage = 'Incorrect login details, try again'
+      if (!founduser.data) return res.status(401).send({ error: errorMessage })
       // continue 
       const match = await bcrypt.compare(password, founduser.data.password);
-      if (!match) return res.status(401).send({ message: 'Account details incorrect' })
-      // generate new salt
-      const salt = bcrypt.genSaltSync(16);
-      const hash = bcrypt.hashSync(password, salt);
+      if (!match) return res.status(401).send({ error: errorMessage })
+      // // generate new salt
+      const salt = await bcrypt.genSaltSync(10);
+      const hash = await bcrypt.hashSync(password, salt);
       await supabase.from('profiles').update(
         { password: hash, salt }
       ).eq("email", email)
       // generate token
-      const access_token = generateToken(founduser.data, ACCESS_TOKEN)
-      const refresh_token = generateToken(founduser.data, REFRESH_TOKEN)
+      const access_token = await generateToken(founduser.data, ACCESS_TOKEN)
+      const refresh_token = await generateToken(founduser.data, REFRESH_TOKEN)
       return res.status(200).send({ refresh_token, access_token })
     } catch (error) {
       console.log(error)
-      return res.status(500).send({ message: 'Something went wrong' })
+      return res.status(500).send({ error: 'Something went wrong' })
     }
   }
 }
