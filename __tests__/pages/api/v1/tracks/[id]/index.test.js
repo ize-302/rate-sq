@@ -27,7 +27,7 @@ describe('/api/v1/tracks/:id', () => {
     const { req, res } = createMocks({
       method: 'GET',
       query: {
-        id: 'e267a760-d190-4381-ae51-ffa97fc448bf'
+        id: '5d015a9d-52b3-42b2-adcc-61bae747f772'
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`

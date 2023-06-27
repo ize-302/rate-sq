@@ -9,14 +9,18 @@ export default function Layout({ children }) {
   const token = getTokenFromCookies(ACCESS_TOKEN)
   const [user, setuser] = React.useState({})
 
-  React.useEffect(() => {
-    const user = verifyToken(token)
+  const getUser = async () => {
+    const user = await verifyToken(token)
     setuser(user)
+  }
 
+  React.useEffect(() => {
+    getUser()
     return () => {
       setuser({})
     }
   }, [token])
+
 
   return (
     <div className="min-h-screen flex flex-col w-full bg-white">

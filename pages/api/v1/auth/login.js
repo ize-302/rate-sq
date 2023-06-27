@@ -31,7 +31,7 @@ export default async function loginHandler(
       const refresh_token = await generateToken(founduser.data, REFRESH_TOKEN)
       return res.status(200).send({ refresh_token, access_token })
     } catch (error) {
-      console.log(error)
+      console.log('err->', error)
       return res.status(500).send({ error: 'Something went wrong' })
     }
   }
