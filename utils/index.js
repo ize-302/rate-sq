@@ -1,7 +1,7 @@
 /* istanbul ignore file */
-export const paginator = (items, page, per_page) => {
-  var page = page || 1,
-    per_page = per_page || 10,
+export const paginator = (items, page = 1, per_page = 10) => {
+  var page = page,
+    per_page = per_page,
     offset = (page - 1) * per_page,
     paginatedItems = items.slice(offset).slice(0, per_page),
     total_pages = Math.ceil(items.length / per_page);
