@@ -1,7 +1,7 @@
 import { supabase } from "@/supabase";
 import { handleTokenVerification } from "@/utils/jwt.utils";
 
-export default async function trackHandler(
+export default async function themeHandler(
   req,
   res
 ) {
@@ -9,13 +9,13 @@ export default async function trackHandler(
     const { id } = req.query
     try {
       await handleTokenVerification(req, res)
-      const foundtrack = await supabase
-        .from("tracks")
+      const foundtheme = await supabase
+        .from("themes")
         .select()
         .eq("id", id)
         .single();
-      if (foundtrack.error) return res.status(404).send({ error: 'Track not found' })
-      return res.status(200).send(foundtrack.data)
+      if (foundtheme.error) return res.status(404).send({ error: 'Theme not found' })
+      return res.status(200).send(foundtheme.data)
     } catch (error) {
       console.log(error)
       return res.status(500).send({ error: 'Something went wrong' })

@@ -1,8 +1,9 @@
 import { createMocks } from "node-mocks-http";
-import trackHandler from '@/pages/api/v1/tracks/[id]/index';
+import themeHandler from "@/pages/api/v1/themes/[id]";
+import { supabase } from "@/supabase";
 
-describe('/api/v1/tracks/:id', () => {
-  // fetch no existent track
+describe('/api/v1/themes/:id', () => {
+  // fetch non existent theme
   it('should return 404 status code with error message', async () => {
     const { req, res } = createMocks({
       method: 'GET',
@@ -13,7 +14,7 @@ describe('/api/v1/tracks/:id', () => {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await trackHandler(req, res);
+    await themeHandler(req, res);
     expect(res._getStatusCode()).toBe(404);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({
@@ -22,21 +23,22 @@ describe('/api/v1/tracks/:id', () => {
     );
   });
 
-  // fetch a track information
-  it('Returns 200 status code and track information', async () => {
+  // fetch a theme information
+  it('Returns 200 status code and theme information', async () => {
     const { req, res } = createMocks({
       method: 'GET',
       query: {
-        id: '5d015a9d-52b3-42b2-adcc-61bae747f772'
+        id: 'c4193ea0-25a2-4bb4-b6c9-4132bad3f972'
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await trackHandler(req, res);
+    await themeHandler(req, res);
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.any(Object),
     );
   })
 });
+
