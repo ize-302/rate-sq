@@ -6,6 +6,9 @@ describe('/api/v1/tracks', () => {
   it('Returns 200 status code and array of tracks', async () => {
     const { req, res } = createMocks({
       method: 'GET',
+      headers: {
+        authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
+      }
     });
     await tracksHandler(req, res);
     expect(res._getStatusCode()).toBe(200);

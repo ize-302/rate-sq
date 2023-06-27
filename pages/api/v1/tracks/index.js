@@ -8,6 +8,7 @@ export default async function tracksHandler(
 ) {
   if (req.method === 'GET') {
     try {
+      await handleTokenVerification(req, res)
       const { page, perpage } = req.query
       const foundtracks = await supabase
         .from("tracks")
