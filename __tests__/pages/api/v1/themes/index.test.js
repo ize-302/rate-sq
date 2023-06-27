@@ -1,39 +1,22 @@
 import { createMocks } from "node-mocks-http";
-import tracksHandler from '@/pages/api/v1/tracks';
+import themesHandler from '@/pages/api/v1/themes';
 
-describe('/api/v1/tracks', () => {
-  // FETCH tracks
-  it('Returns 200 status code and array of tracks', async () => {
-    const { req, res } = createMocks({
-      method: 'GET',
-      headers: {
-        authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
-      }
-    });
-    await tracksHandler(req, res);
-    expect(res._getStatusCode()).toBe(200);
-    expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
-      expect.objectContaining({
-        items: expect.any(Array),
-      }),
-    );
-  })
 
-  // TRACK CREATION
+describe('/api/v1/themes', () => {
+  // ADD A THEME
   it('Returns 400 status code error and error message when some fields are missing', async () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        title: 'kolade the mosquito',
-        media_path: '',
-        composers: ['ramin-djawadi'],
-        related_film: ''
+        themoviedb_id: 'id here',
+        theme_url: '',
+        composers: [],
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await tracksHandler(req, res);
+    await themesHandler(req, res);
     expect(res._getStatusCode()).toBe(400);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({
@@ -42,20 +25,20 @@ describe('/api/v1/tracks', () => {
     );
   })
 
+
   it('Creates a track and returns 201 status code and success message when all fields are availble', async () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        title: 'kolade the mosquito',
-        media_path: 'https://youtu.be/YFhxQ8kmJw0',
-        composers: ['ramin-djawadi'],
-        related_film: 'dadasd'
+        themoviedb_id: 'test-movie-db-id',
+        theme_url: 'url here',
+        composers: ['composer1', 'composer2'],
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await tracksHandler(req, res);
+    await themesHandler(req, res);
     expect(res._getStatusCode()).toBe(201);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({
@@ -63,4 +46,5 @@ describe('/api/v1/tracks', () => {
       }),
     );
   })
+
 });
