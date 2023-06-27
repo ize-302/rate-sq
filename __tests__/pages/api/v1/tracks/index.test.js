@@ -25,6 +25,9 @@ describe('/api/v1/tracks', () => {
         media_path: '',
         composers: ['ramin-djawadi'],
         related_film: ''
+      },
+      headers: {
+        authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
     await tracksHandler(req, res);
@@ -44,6 +47,9 @@ describe('/api/v1/tracks', () => {
         media_path: 'https://youtu.be/YFhxQ8kmJw0',
         composers: ['ramin-djawadi'],
         related_film: 'dadasd'
+      },
+      headers: {
+        authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
     await tracksHandler(req, res);
