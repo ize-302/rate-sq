@@ -1,5 +1,4 @@
 import { supabase } from "@/supabase";
-import { handleTokenVerification } from "@/utils/jwt.utils";
 
 export default async function themeHandler(
   req,
@@ -8,7 +7,6 @@ export default async function themeHandler(
   if (req.method === 'GET') {
     const { id } = req.query
     try {
-      await handleTokenVerification(req, res)
       const foundtheme = await supabase
         .from("themes")
         .select()

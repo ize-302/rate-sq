@@ -28,7 +28,7 @@ describe('/api/v1/themes/:id', () => {
     const { req, res } = createMocks({
       method: 'GET',
       query: {
-        id: 'c4193ea0-25a2-4bb4-b6c9-4132bad3f972'
+        id: '65f51928-cf09-41ea-b71c-0a1f26d760c3'
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`

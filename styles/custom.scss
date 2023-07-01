@@ -13,3 +13,13 @@ ul {
   height: 40px;
   border-color: rgb(210, 210, 210);
 }
+
+.mantine-Carousel-control {
+  background-color: #062828;
+  color: #6fda86;
+  border: none;
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}
