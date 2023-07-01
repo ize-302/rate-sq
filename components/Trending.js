@@ -7,12 +7,12 @@ import { useRouter } from 'next/router';
 import { IconPlayerPlay } from '@tabler/icons-react';
 import Link from 'next/link';
 
-export const Trending = ({ media_type }) => {
+export const Trending = () => {
   const [data, setdata] = React.useState({})
   const router = useRouter()
 
   React.useEffect(() => {
-    axios.get(`/api/v1/trending/${media_type}?page=2`).then(response => {
+    axios.get(`/api/v1/trending/tv?page=2`).then(response => {
       console.log(response.data)
       setdata(response.data)
     }).catch(err => {

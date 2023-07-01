@@ -17,7 +17,7 @@ import { IconLink } from '@tabler/icons-react'
 
 export default function Home() {
   const router = useRouter()
-  const { media_type, id } = (router.query)
+  const { id } = (router.query)
   const [data, setdata] = React.useState({})
   const token = getTokenFromCookies(ACCESS_TOKEN)
   const [user, setuser] = React.useState({})
@@ -35,8 +35,8 @@ export default function Home() {
   }, [token])
 
   React.useEffect(() => {
-    if (media_type && id) {
-      axios.get(`/api/v1/${media_type}/${id}`).then(response => {
+    if (id) {
+      axios.get(`/api/v1/tv/${id}`).then(response => {
         setdata(response.data)
       }).catch(error => {
         console.log(error)
@@ -69,9 +69,6 @@ export default function Home() {
       </div>
       <Container>
         <div className="aspect-video bg-secondary relative -top-80 rounded-md left-0 border border-primary">
-          <div className='absolute z-10 top-4 right-4 bg-red-400 rounded-full'>
-            <IconDots />s
-          </div>
           <iframe className='w-full h-full rounded-md' src="https://www.youtube.com/embed/AJlOS6ZeIcA?rel=0" title="Silo — Opening Title Sequence | Apple TV+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </Container>

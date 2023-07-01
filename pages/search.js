@@ -46,7 +46,7 @@ export default function Search() {
   const handleSearch = () => {
     setloading(true)
     axios.get(`/api/v1/search/film?query=${query}`).then(response => {
-      setsearchresults(response.data.results.filter(result => ['movie', 'tv'].includes(result.media_type)))
+      setsearchresults(response.data.results.filter(result => ['tv'].includes(result.media_type)))
       setloading(false)
     }).catch(error => {
       setloading(false)

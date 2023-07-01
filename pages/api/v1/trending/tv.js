@@ -5,8 +5,8 @@ export default async function trendingMoviesHandler(
   res
 ) {
   try {
-    const { media_type, page } = req.query
-    const response = await axios.get(`https://api.themoviedb.org/3/trending/${media_type}/day?include_adult=false&language=en-US&page=${page}`, {
+    const { page } = req.query
+    const response = await axios.get(`https://api.themoviedb.org/3/trending/tv/day?include_adult=false&language=en-US&page=${page}`, {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
       }

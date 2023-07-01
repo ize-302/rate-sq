@@ -12,7 +12,7 @@ export default function Home() {
       <HeroSection showHeadings={true} height='h-96' />
       <Container>
         <div className='w-full justify-between gap-8 my-20'>
-          <Trending media_type={'tv'} />
+          <Trending />
         </div>
       </Container>
     </Layout>
