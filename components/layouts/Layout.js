@@ -26,15 +26,16 @@ export default function Layout({ children }) {
     <div className="min-h-screen flex flex-col w-full bg-white">
       <Navigation user={user} />
       <div className={`w-full flex-1`}>
-        <div className="max-w-7xl mx-auto px-4 flex gap-20">
+        <div>
           {children}
         </div>
       </div>
-      <div className='border-t text-center flex justify-center py-5'>
-        <Group className='flex flex-col gap-[0px] items-start'>
-          <Text className='m-0 font-semibold text-xl' color='gray'>OstRating</Text>
-          <Rating defaultValue={2} className='m-0' color='gray' />
+      <div className='bg-secondary border-t text-center flex items-center flex-col py-10'>
+        <Group className='flex flex-col gap-[0px] items-center'>
+          <Text className='m-0 font-semibold text-xl' color='#fff'>RateTSQ</Text>
+          <Rating defaultValue={5} className='m-0' size='sm' color='#fff' />
         </Group>
+        <Text color='white' size='sm' className='mt-10'>Built with 🔥  by <a className='underline' target="_blank" href="https://github.com/ize-302">Adavize Hassan</a></Text>
       </div>
     </div>
   )

@@ -1,14 +1,20 @@
 import React from 'react'
-import { ACCESS_TOKEN } from '@/utils/constants'
-import { getTokenFromCookies } from '@/utils/cookies.utils'
-import { verifyToken } from '@/utils/jwt.utils'
 import Layout from '@/components/layouts/Layout'
+import { HeroSection } from '@/components/HeroSection'
+import { Container } from '@/components/layouts/Container'
+import { LatestRatings } from '@/components/LatestRatings'
+import { Trending } from '@/components/Trending'
+import { MostRated } from '@/components/MostRated'
 
 export default function Home() {
-  const token = getTokenFromCookies(ACCESS_TOKEN)
-  const user = verifyToken(token)
-
-  return <Layout>
-
-  </Layout>
+  return (
+    <Layout>
+      <HeroSection showHeadings={true} height='h-96' />
+      <Container>
+        <div className='w-full justify-between gap-8 my-20'>
+          <Trending media_type={'tv'} />
+        </div>
+      </Container>
+    </Layout>
+  )
 }
