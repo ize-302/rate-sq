@@ -1440,14 +1440,14 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@mantine/carousel@^6.0.15":
+"@mantine/carousel@^6.0.14":
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-6.0.15.tgz#64220f544a9dbb46036e9820bb65803d6452480b"
   integrity sha512-5eYPSi8Q6Ze9YDQ8iaNmBHI542PZlzj4SIxF900B1R0D9NckXbev/1pa16Z9ogKNwxttgYzmMq6GDKvfgGzR3A==
   dependencies:
     "@mantine/utils" "6.0.15"
 
-"@mantine/core@^6.0.15":
+"@mantine/core@^6.0.14":
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-6.0.15.tgz#6956533f6163ef3b715dd84746e8096a973b6796"
   integrity sha512-CN2UV2RXumxac75cWgUPMcHiE36T4ciIpFf20JwpazshnwFNu7scvy6GJDwUouf0zTBLnPMAD1S/B4mIRc3aQw==
@@ -1459,7 +1459,7 @@
     react-remove-scroll "^2.5.5"
     react-textarea-autosize "8.3.4"
 
-"@mantine/form@^6.0.15":
+"@mantine/form@^6.0.14":
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/@mantine/form/-/form-6.0.15.tgz#e78d953669888e01d3778ee8f62d469a12668c42"
   integrity sha512-Tz4AuZZ/ddGvEh5zJbDyi9PlGqTilJBdCjRGIgs3zn3hQsfg+ku7/NUR5zNB64dcWPJvGKc074y4iopNIl3FWQ==
@@ -1467,12 +1467,12 @@
     fast-deep-equal "^3.1.3"
     klona "^2.0.5"
 
-"@mantine/hooks@^6.0.15":
+"@mantine/hooks@^6.0.14":
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-6.0.15.tgz#f0f95bdad5e993f12a9f0b543b2cfc1b4e85f896"
   integrity sha512-2CtNKw/tdiXjeseldrg1J2jy+WKrwiCY/J6UMkZqlZ8aM0j3vFVl5cnyn46i5KzbdGqNjW01aihfJJfkeQh4oQ==
 
-"@mantine/notifications@^6.0.15":
+"@mantine/notifications@^6.0.14":
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-6.0.15.tgz#94876499a306eb7175fcee9da83d140a2cac2fb9"
   integrity sha512-UIp3X7vFUPFQdyPSOPufTt0PyTOPIYob0i3gsYn5Kp7Nbo4qBhn1jt/Tw58L1kYDEvLB10NvGee6UCdHz6lF1A==
@@ -1480,7 +1480,7 @@
     "@mantine/utils" "6.0.15"
     react-transition-group "4.4.2"
 
-"@mantine/nprogress@^6.0.15":
+"@mantine/nprogress@^6.0.14":
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/@mantine/nprogress/-/nprogress-6.0.15.tgz#50374d78e7ab851671f595a2572e9205ce91fa4b"
   integrity sha512-SHmRq3t0iy1FsZ0E4vdlR/EHsQHeo9dt3920KJqvTUyJLIk8DY8cIDK36qav56V49Ocef4uIEUR+G/foTa2EgQ==
