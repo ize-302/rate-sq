@@ -2,22 +2,19 @@ import React from 'react'
 import Layout from '@/components/layouts/Layout'
 import { HeroSection } from '@/components/HeroSection'
 import { Container } from '@/components/layouts/Container'
-import { LatestRatings } from '@/components/LatestRatings'
-import { Trending } from '@/components/Trending'
-import { MostRated } from '@/components/MostRated'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { Avatar, Group, Skeleton, Text } from '@mantine/core'
 import Link from 'next/link'
-import { ACCESS_TOKEN } from '@/utils/constants'
-import { verifyToken } from '@/utils/jwt.utils'
-
+import LazyLoad from 'react-lazyload';
 
 const SelectItem = ({ item }) => {
   return (
     <div className='cursor-pointer pb-4 pt-2 rounded border-b'>
       <Group noWrap>
-        <Avatar size={'xl'} src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
+        <LazyLoad>
+          <Avatar size={'xl'} src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
+        </LazyLoad>
         <div>
           <Link className='underline' href={`/${item.media_type}/${item.id}`} size="md">{item.original_name || item.original_title}</Link>
           <Text size="sm" opacity={0.65}>
@@ -56,7 +53,7 @@ export default function Search() {
 
   return (
     <Layout>
-      <HeroSection showHeadings={false} height='h-32' initialsearchvalue={query} />
+      <HeroSection showHeadings={false} height='h-32' />
       <Container>
         <div className='w-full my-10'>
           <Text className='pb-1 text-2xl mb-5'>Search result for '<b>{query}</b>'</Text>
