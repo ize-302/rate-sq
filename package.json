@@ -40,9 +40,11 @@
     "jose": "^4.14.4",
     "js-cookie": "^3.0.5",
     "next": "^13.4.7",
+    "number-abbreviate": "^2.0.0",
     "postcss": "8.4.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-lazyload": "github:twobin/react-lazyload",
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {
