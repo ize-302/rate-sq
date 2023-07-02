@@ -60,7 +60,7 @@ export default function Search() {
           <div className='flex flex-col gap-5'>
             {loading && (
               <>
-                {[1, 2, 3, 4, 5].map(item => (
+                {Array(5).fill(0).map(item => (
                   <div key={item} className='flex gap-3'>
                     <Skeleton className='w-24 h-24' size='xl' radius='md' />
                     <div className='flex flex-col gap-3 w-full'>
