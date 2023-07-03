@@ -10,7 +10,7 @@ export default async function themeHandler(
       const foundtheme = await supabase
         .from("themes")
         .select()
-        .eq("id", id)
+        .eq("themoviedb_id", id)
         .single();
       if (foundtheme.error) return res.status(404).send({ error: 'Theme not found' })
       return res.status(200).send(foundtheme.data)

@@ -10,7 +10,6 @@ describe('/api/v1/themes', () => {
       body: {
         themoviedb_id: 'id here',
         theme_url: '',
-        composers: [],
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
@@ -32,7 +31,6 @@ describe('/api/v1/themes', () => {
       body: {
         themoviedb_id: 'test-movie-db-id',
         theme_url: 'url here',
-        composers: ['composer1', 'composer2'],
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`

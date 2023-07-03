@@ -6,14 +6,14 @@ export default async function themesHandler(
   res
 ) {
   if (req.method === 'POST') {
-    const { themoviedb_id, theme_url, composers } = req.body
+    const { themoviedb_id, theme_url } = req.body
     try {
       const isAuthorized = await handleTokenVerification(req, res)
       if (!themoviedb_id || !theme_url) {
         return res.status(400).send({ error: 'Required fields missing' })
       }
       await supabase.from('themes').insert([
-        { themoviedb_id, theme_url, composers, added_by: isAuthorized.id }
+        { themoviedb_id, theme_url, added_by: isAuthorized.id }
       ]).select("*")
         .single();
       // delete ttest-movie-db-id user after testing

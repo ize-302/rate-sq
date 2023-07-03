@@ -6,12 +6,16 @@ import { IconDots, IconStarHalfFilled, IconBrandYoutube, IconDisc } from '@table
 import Link from 'next/link';
 import LazyLoad from 'react-lazyload';
 import NumberAbbreviate from 'number-abbreviate';
+import { RateTSQ } from './RateTSQ';
+import { useDisclosure } from '@mantine/hooks';
 
 export const Trending = () => {
   const [data, setdata] = React.useState({})
   const router = useRouter()
   const [loading, setloading] = React.useState(true)
   const page = router.query.page ? router.query.page : 1
+  const [TSQtoRate, setTSQtoRate] = React.useState({})
+  const [opened, { open, close }] = useDisclosure(false);
 
   React.useEffect(() => {
     setloading(true)
@@ -31,6 +35,7 @@ export const Trending = () => {
 
   return (
     <div>
+      <RateTSQ item={TSQtoRate} opened={opened} open={open} close={close} />
       <Text className='text-center text-xl md:text-2xl mb-10'>Trending TV Shows</Text>
       <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
         {!loading && data.results?.map((item, index) => (
@@ -44,11 +49,14 @@ export const Trending = () => {
                   <Menu.Dropdown>
                     <Menu.Item icon={<IconBrandYoutube size={14} />}>Play TSQ</Menu.Item>
                     <Menu.Divider />
-                    <Menu.Item icon={<IconStarHalfFilled size={14} />}>Rate TSQ</Menu.Item>
+                    <Menu.Item onClick={() => {
+                      setTSQtoRate(item)
+                      open()
+                    }} icon={<IconStarHalfFilled size={14} />}>Rate TSQ</Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
                 <div className='bg-secondary/50 rounded-full border border-primary flex flex-col items-center justify-center p-1 w-20 h-20 gap-1 text-primary font-semibold'>
-                  <IconDisc />
+                  <IconDisc size='xs' />
                   4.5</div>
               </div>
               <Avatar className='rounded-lg bg-secondary h-[340px] relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
