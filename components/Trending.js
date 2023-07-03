@@ -51,7 +51,7 @@ export const Trending = () => {
                   <IconDisc />
                   4.5</div>
               </div>
-              <Avatar className='rounded-lg bg-secondary h-full relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
+              <Avatar className='rounded-lg bg-secondary h-[340px] relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
             </LazyLoad>
             <Link href={`/${item.media_type}/${item.id}`} className='font-semibold mt-2'>{item.original_name || item.original_title}</Link>
           </div>
@@ -71,7 +71,7 @@ export const Trending = () => {
           Showing <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">10</span> of <span className="font-semibold text-gray-900">{NumberAbbreviate(data.total_results)}</span> Entries
         </span>
         <div className="inline-flex mt-2 xs:mt-0">
-          <button className="px-4 py-2 text-sm font-medium text-primary bg-secondary rounded-l hover:bg-gray-900 ">
+          <button onClick={() => router.push({ query: { page: Number(page) - 1 } })} className="px-4 py-2 text-sm font-medium text-primary bg-secondary rounded-l hover:bg-gray-900 ">
             Prev
           </button>
           <button onClick={() => router.push({ query: { page: Number(page) + 1 } })} className="px-4 py-2 text-sm font-medium text-primary bg-secondary border-0 border-l border-gray-700 rounded-r hover:bg-gray-900">
