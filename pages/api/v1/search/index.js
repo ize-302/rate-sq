@@ -1,21 +1,19 @@
-import { supabase } from '@/supabase'
-import { filldata } from '@/utils';
-import axios from 'axios';
+import { filldata } from '@/utils'
+import axios from 'axios'
 
-export default async function searchHandler(
+export default async function filmSearchHandler(
   req,
   res
 ) {
-  const query = req.query.query ? req.query.query : ''
+  const { query } = req.query
   try {
-    const foundtitles = await supabase.from('titles')
-      .select()
-      .textSearch('name', query, {
-        type: 'websearch'
-      })
-
-    const results = await filldata({ data: foundtitles.data })
-
+    const response = await axios.get(`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`, {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
+      }
+    })
+    const filtered = response.data.results.filter(item => item.media_type === 'tv')
+    const results = await filldata({ data: filtered, fromsearch: true })
     return res.status(200).send({ items: results })
   } catch (error) {
     console.log(error)

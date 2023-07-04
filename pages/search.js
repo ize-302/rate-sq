@@ -22,8 +22,7 @@ export default function Search() {
 
   const handleSearch = () => {
     setloading(true)
-    axios.get(`/api/v1/search/themoviedb?query=${query}`).then(response => {
-      console.log(response.data)
+    axios.get(`/api/v1/search?query=${query}`).then(response => {
       setsearchresults(response.data.items)
       setloading(false)
     }).catch(error => {
