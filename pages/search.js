@@ -17,6 +17,7 @@ export default function Search() {
     handleSearch()
     return () => {
       setsearchresults([])
+      setloading(false)
     }
   }, [query])
 

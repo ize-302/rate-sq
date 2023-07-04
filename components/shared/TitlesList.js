@@ -1,23 +1,23 @@
 import React from 'react'
-import { Avatar, Menu, Skeleton } from '@mantine/core'
+import { Avatar, Drawer, Menu, Skeleton } from '@mantine/core'
 import { IconDisc, IconDots, IconBrandYoutube, IconStarHalfFilled } from '@tabler/icons-react'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
-import { RateTSQ } from '../RateTSQ'
 import { useDisclosure } from '@mantine/hooks'
+import { MyDrawer } from '../Drawer/index'
 
 export const TitlesList = ({ loading, titles }) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [TSQtoRate, setTSQtoRate] = React.useState({})
+  const [draweritem, setdraweritem] = React.useState({})
 
   return (
     <>
-      <RateTSQ item={TSQtoRate} opened={opened} open={open} close={close} />
-
       <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
+        <MyDrawer item={draweritem} opened={opened} open={open} close={close} />
+
         {!loading && titles?.map((item, index) => (
           <div key={index} className='flex flex-col gap-1' onClick={() => {
-            setTSQtoRate(item)
+            setdraweritem(item)
             open()
           }}>
             <LazyLoad className='relative'>

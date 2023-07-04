@@ -1,21 +1,22 @@
 import { createMocks } from "node-mocks-http";
-import themesHandler from '@/pages/api/v1/themes';
+import titlesHandler from '@/pages/api/v1/titles';
 
 
-describe('/api/v1/themes', () => {
+describe('/api/v1/titles', () => {
   // ADD A THEME
   it('Returns 400 status code error and error message when some fields are missing', async () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        themoviedb_id: 'id here',
-        theme_url: '',
+        id: 'test-id',
+        name: '',
+        embed_code: ''
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await themesHandler(req, res);
+    await titlesHandler(req, res);
     expect(res._getStatusCode()).toBe(400);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({
@@ -29,14 +30,15 @@ describe('/api/v1/themes', () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        themoviedb_id: 'test-movie-db-id',
-        theme_url: 'url here',
+        id: 'test-id',
+        name: 'name here',
+        embed_code: 'embed_code here'
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await themesHandler(req, res);
+    await titlesHandler(req, res);
     expect(res._getStatusCode()).toBe(201);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({

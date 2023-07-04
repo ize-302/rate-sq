@@ -24,6 +24,7 @@ export const NewlyAdded = () => {
 
     return () => {
       setdata({})
+      setloading(false)
     }
   }, [router])
 
