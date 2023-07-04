@@ -1,19 +1,19 @@
 import { supabase } from "@/supabase";
 
-export default async function themeHandler(
+export default async function titleHandler(
   req,
   res
 ) {
   if (req.method === 'GET') {
     const { id } = req.query
     try {
-      const foundtheme = await supabase
-        .from("themes")
+      const foundtitle = await supabase
+        .from("titles")
         .select()
         .eq("id", id)
         .single();
-      if (foundtheme.error) return res.status(404).send({ error: 'Theme not found' })
-      return res.status(200).send(foundtheme.data)
+      if (foundtitle.error) return res.status(404).send({ error: 'Title not found' })
+      return res.status(200).send(foundtitle.data)
     } catch (error) {
       console.log(error)
       return res.status(500).send({ error: 'Something went wrong' })

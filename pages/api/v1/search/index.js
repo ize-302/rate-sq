@@ -1,3 +1,4 @@
+import { filldata } from '@/utils'
 import axios from 'axios'
 
 export default async function filmSearchHandler(
@@ -11,7 +12,9 @@ export default async function filmSearchHandler(
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
       }
     })
-    return res.status(200).send(response.data)
+    const filtered = response.data.results.filter(item => item.media_type === 'tv')
+    const results = await filldata({ data: filtered, fromsearch: true })
+    return res.status(200).send({ items: results })
   } catch (error) {
     console.log(error)
     return res.status(500).send({ error: 'Something went wrong' })

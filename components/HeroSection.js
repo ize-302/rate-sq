@@ -4,7 +4,7 @@ import { Text, Button } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { useForm } from '@mantine/form'
 
-export const HeroSection = ({ showHeadings, height }) => {
+export const HeroSection = ({ heading }) => {
   const router = useRouter()
 
   const form = useForm({
@@ -18,15 +18,15 @@ export const HeroSection = ({ showHeadings, height }) => {
   });
 
   return (
-    <div className={`${height} bg-secondary`}>
+    <div className={` bg-secondary py-10`}>
       <Container maxW='max-w-4xl'>
         <div className='flex flex-col justify-center h-full'>
-          {showHeadings && (
-            <Text className='text-white text-2xl mb-4 md:mb-1 text-center'>
-              Find your favourite tv shows <br />and rate their title. Explore now.</Text>
-          )}
+
+          <Text className='text-white text-2xl mb-4 md:mb-1 text-center'>
+            Find your favourite tv shows and rate their title. Explore now.</Text>
+
           <form className='flex flex-col md:flex-row items-center  pl-5 mt-2 gap-3 md:gap-0' onSubmit={form.onSubmit((values) => router.push({
-            pathname: '/search',
+            pathname: 'search',
             query: {
               query: values.query
             }
