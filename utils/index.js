@@ -26,8 +26,8 @@ export const getPagination = ({ page, per_page }) => {
 
 export const filldata = async ({ data }) => {
   const result = await Promise.all(
-    data.map(async title => {
-      const themoviedb_response = await axios.get(`https://api.themoviedb.org/3/tv/${title.show_id}`, {
+    data.map(async item => {
+      const themoviedb_response = await axios.get(`https://api.themoviedb.org/3/tv/${item.id}`, {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
         }
@@ -35,7 +35,12 @@ export const filldata = async ({ data }) => {
       const ratings = await supabase
         .from("ratings")
         .select()
-        .eq("title_id", title.id)
+        .eq("show_id", item.id)
+      const title = await supabase
+        .from("titles")
+        .select().single()
+        .eq("id", item.id)
+
       // calculating average rating
       // avg ratings = sum of all ratings / number of responses
       let total_responses = 0
@@ -47,18 +52,23 @@ export const filldata = async ({ data }) => {
         total_ratings = total_ratings + ((i + 1) * occurence)
       })
       average_rating = Number((total_ratings / total_responses).toFixed(1))
-
-      return {
-        title_id: title.id,
+      const data_obj = {
+        title_id: item.id,
         show_id: themoviedb_response.data.id,
-        name: title.name,
+        name: item.name,
         backdrop_path: themoviedb_response.data.backdrop_path,
         poster_path: themoviedb_response.data.poster_path,
-        embed_id: title.embed_id,
-        added_by: title.added_by,
+        embed_code: title.data ? title.data.embed_code : null,
+        added_by: item.added_by,
         ratings: average_rating,
+        exists: title.error ? false : true
       }
+      return data_obj
     })
   );
-  return result
+  return result.sort((a, b) => {
+    if (b.exists && !a.exists) return 1
+    if (!b.exists && a.exists) return -1;
+    return 0;
+  })
 }

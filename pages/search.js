@@ -22,7 +22,8 @@ export default function Search() {
 
   const handleSearch = () => {
     setloading(true)
-    axios.get(`/api/v1/search?query=${query}`).then(response => {
+    axios.get(`/api/v1/search/themoviedb?query=${query}`).then(response => {
+      console.log(response.data)
       setsearchresults(response.data.items)
       setloading(false)
     }).catch(error => {
@@ -31,13 +32,16 @@ export default function Search() {
     })
   }
 
+
   return (
     <Layout>
-      <HeroSection showHeadings={false} height='h-32' />
+      <HeroSection height='h-32' />
       <Container>
-        <div className='w-full my-10'>
-          <Text className='pb-1 text-2xl mb-5'>Search result for '<b>{query}</b>'</Text>
-          <TitlesList loading={loading} titles={searchresults} />
+        <div className='w-full my-10 grid gap-10'>
+          <div>
+            <Text className='pb-1 text-2xl mb-5'>Search result for '<b>{query}</b>'</Text>
+            <TitlesList loading={loading} titles={searchresults} />
+          </div>
         </div>
       </Container>
     </Layout>

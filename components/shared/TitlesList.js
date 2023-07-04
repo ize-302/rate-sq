@@ -16,25 +16,20 @@ export const TitlesList = ({ loading, titles }) => {
 
       <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
         {!loading && titles?.map((item, index) => (
-          <div key={index} className='flex flex-col gap-1'>
+          <div key={index} className='flex flex-col gap-1' onClick={() => {
+            setTSQtoRate(item)
+            open()
+          }}>
             <LazyLoad className='relative'>
               <div className='rounded-lg cursor-pointer h-full w-full absolute top-0 left-0 z-10 flex items-center justify-center'>
-                <Menu shadow="md" position='bottom-end' withArrow>
-                  <Menu.Target>
-                    <div className='bg-white/50 flex items-center justify-center top-1 right-1 h-6 w-6 absolute rounded-full'> <IconDots size='sm' color='black' /></div>
-                  </Menu.Target>
-                  <Menu.Dropdown>
-                    <Menu.Item icon={<IconBrandYoutube size={14} />}>Play TSQ</Menu.Item>
-                    <Menu.Divider />
-                    <Menu.Item onClick={() => {
-                      setTSQtoRate(item)
-                      open()
-                    }} icon={<IconStarHalfFilled size={14} />}>Rate TSQ</Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
-                <div className='bg-secondary/50 rounded-full border border-primary flex flex-col items-center justify-center p-1 w-20 h-20 gap-1 text-primary font-semibold'>
-                  <IconDisc size='xs' />
-                  {item.ratings} / 5</div>
+                <div className='bg-secondary/50 rounded-lg border flex flex-col items-center justify-center p-1 w-full h-full gap-1 text-white font-semibold'>
+                  {!item.ratings ? (
+                    <>No rating yet</>
+                  ) : (
+                    <> {item.ratings} / 5</>
+                  )}
+                </div>
+
               </div>
               <Avatar className='rounded-lg bg-secondary h-[340px] relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
             </LazyLoad>

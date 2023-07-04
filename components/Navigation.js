@@ -1,10 +1,10 @@
 import React from 'react'
-import { Box, Group, Button, Menu, Rating } from "@mantine/core";
+import { Box, Group, Button, Menu, Rating, Tooltip } from "@mantine/core";
 import { useRouter } from "next/router";
 import {
   IconLogout,
   IconUserCircle,
-  IconMenu
+  IconMenu, IconDeviceTvOld
 } from "@tabler/icons-react";
 import { removeTokenFromCookies } from '@/utils/cookies.utils';
 
@@ -45,6 +45,12 @@ export function Navigation({ user }) {
             </Group>
           ) : (
             <Group className="gap-4">
+              <Tooltip label="Add new show">
+                <Button onClick={() => router.push({ pathname: 'search' })} className="bg-green-800 hover:bg-green-800 border-0 px-1" style={{ height: '26px' }}>
+                  <IconDeviceTvOld strokeWidth={1.5} color="#fff" size={20} />
+                </Button>
+              </Tooltip>
+
               <Menu shadow="md" width={120} position="bottom-end" trigger="hover">
                 <Menu.Target>
                   <Button className="bg-transparent hover:bg-transparent border-0 px-0 h-[30px]">
