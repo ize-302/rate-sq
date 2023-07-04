@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Skeleton, Text, Menu, Button } from '@mantine/core';
+import { Avatar, Skeleton, Text, Menu, Button, Pagination } from '@mantine/core';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { IconDots, IconStarHalfFilled, IconBrandYoutube, IconDisc } from '@tabler/icons-react';
@@ -9,17 +9,17 @@ import NumberAbbreviate from 'number-abbreviate';
 import { RateTSQ } from './RateTSQ';
 import { useDisclosure } from '@mantine/hooks';
 
-export const Trending = () => {
+export const NewlyAdded = () => {
   const [data, setdata] = React.useState({})
   const router = useRouter()
   const [loading, setloading] = React.useState(true)
-  const page = router.query.page ? router.query.page : 1
+  const page = router.query.page ? router.query.page : 0
   const [TSQtoRate, setTSQtoRate] = React.useState({})
   const [opened, { open, close }] = useDisclosure(false);
 
   React.useEffect(() => {
     setloading(true)
-    axios.get(`/api/v1/trending/tv?page=${page}`).then(response => {
+    axios.get(`/api/v1/titles?page=${page}&per_page=20`).then(response => {
       setdata(response.data)
       setloading(false)
     }).catch(err => {
@@ -32,13 +32,15 @@ export const Trending = () => {
     }
   }, [router])
 
+  console.log(data)
+
 
   return (
     <div>
       <RateTSQ item={TSQtoRate} opened={opened} open={open} close={close} />
-      <Text className='text-center text-xl md:text-2xl mb-10'>Trending TV Shows</Text>
+      <Text className='text-center text-xl md:text-2xl mb-10'>Newly added Shows</Text>
       <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
-        {!loading && data.results?.map((item, index) => (
+        {!loading && data.items?.map((item, index) => (
           <div key={index} className='flex flex-col gap-1'>
             <LazyLoad className='relative'>
               <div className='rounded-lg cursor-pointer h-full w-full absolute top-0 left-0 z-10 flex items-center justify-center'>
@@ -57,11 +59,11 @@ export const Trending = () => {
                 </Menu>
                 <div className='bg-secondary/50 rounded-full border border-primary flex flex-col items-center justify-center p-1 w-20 h-20 gap-1 text-primary font-semibold'>
                   <IconDisc size='xs' />
-                  4.5</div>
+                  {item.ratings} / 5</div>
               </div>
               <Avatar className='rounded-lg bg-secondary h-[340px] relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
             </LazyLoad>
-            <Link href={`/${item.media_type}/${item.id}`} className='font-semibold mt-2'>{item.original_name || item.original_title}</Link>
+            <Link href={`/tv/${item.show_id}`} className='font-semibold mt-2'>{item.name}</Link>
           </div>
         ))}
         {loading && Array(20).fill(0).map((_, index) => (
@@ -73,20 +75,26 @@ export const Trending = () => {
         )}
       </div>
 
-
-      <div className="flex flex-col items-center mt-10">
-        <span className="text-sm text-gray-700">
-          Showing <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">10</span> of <span className="font-semibold text-gray-900">{NumberAbbreviate(data.total_results)}</span> Entries
-        </span>
-        <div className="inline-flex mt-2 xs:mt-0">
-          <button onClick={() => router.push({ query: { page: Number(page) - 1 } })} className="px-4 py-2 text-sm font-medium text-primary bg-secondary rounded-l hover:bg-gray-900 ">
-            Prev
-          </button>
-          <button onClick={() => router.push({ query: { page: Number(page) + 1 } })} className="px-4 py-2 text-sm font-medium text-primary bg-secondary border-0 border-l border-gray-700 rounded-r hover:bg-gray-900">
-            Next
-          </button>
+      {data.total_pages > 1 && (
+        <div className="flex justify-between items-center mt-10">
+          <span className="text-sm text-gray-700">
+            Showing <span className="font-semibold text-gray-900">{data.from + 1}</span> {" "}
+            {data.from !== data.to && (
+              <>
+                to <span className="font-semibold text-gray-900">{data.to + 1}</span> {" "}
+              </>
+            )}
+            of <span className="font-semibold text-gray-900">{NumberAbbreviate(data.count)}</span> Entries
+          </span>
+          <Pagination styles={(theme) => ({
+            control: {
+              "&[data-active]": {
+                background: '#062828',
+              },
+            },
+          })} value={data.page} onChange={(page) => router.push({ query: { page: Number(page) } })} total={data.count} />
         </div>
-      </div>
+      )}
 
     </div>
   )
