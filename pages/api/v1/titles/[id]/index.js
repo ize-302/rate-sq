@@ -1,4 +1,5 @@
 import { supabase } from "@/supabase";
+import { filldata } from "@/utils";
 
 export default async function titleHandler(
   req,
@@ -13,7 +14,8 @@ export default async function titleHandler(
         .eq("id", id)
         .single();
       if (foundtitle.error) return res.status(404).send({ error: 'Title not found' })
-      return res.status(200).send(foundtitle.data)
+      const result = await filldata({ data: [foundtitle.data] })
+      return res.status(200).send(result[0])
     } catch (error) {
       console.log(error)
       return res.status(500).send({ error: 'Something went wrong' })

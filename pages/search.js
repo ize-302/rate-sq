@@ -3,35 +3,22 @@ import Layout from '@/components/layouts/Layout'
 import { HeroSection } from '@/components/HeroSection'
 import { Container } from '@/components/layouts/Container'
 import { useRouter } from 'next/router'
-import axios from 'axios'
 import { Text } from '@mantine/core'
 import { TitlesList } from '@/components/shared/TitlesList'
+import { TitleContext } from '@/context/titleContext'
 
 export default function Search() {
   const router = useRouter()
   const { query } = router.query
-  const [searchresults, setsearchresults] = React.useState([])
-  const [loading, setloading] = React.useState(false)
+  const { handleSearch, loading, searchresults, setsearchresults, setloading } = React.useContext(TitleContext)
 
   React.useEffect(() => {
-    handleSearch()
+    setloading(true)
+    handleSearch(query)
     return () => {
       setsearchresults([])
-      setloading(false)
     }
   }, [query])
-
-  const handleSearch = () => {
-    setloading(true)
-    axios.get(`/api/v1/search?query=${query}`).then(response => {
-      setsearchresults(response.data.items)
-      setloading(false)
-    }).catch(error => {
-      setloading(false)
-      console.log(error)
-    })
-  }
-
 
   return (
     <Layout>
