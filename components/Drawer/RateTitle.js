@@ -11,7 +11,7 @@ import { IconCheck } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 
 export const RateTitle = () => {
-  const { item } = React.useContext(TitleContext)
+  const { item, fetchTitles } = React.useContext(TitleContext)
   const { user } = React.useContext(UserContext)
   const token = getTokenFromCookies(ACCESS_TOKEN)
   const [loading, setloading] = React.useState(false)
@@ -37,6 +37,7 @@ export const RateTitle = () => {
       }
     }).then(response => {
       setloading(false)
+      fetchTitles()
       notifications.show({
         title: response.data.success,
         message: "",

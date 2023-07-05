@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 export const TitleContext = React.createContext(null);
@@ -9,6 +10,9 @@ const TitleProvider = ({
   const [item, setitem] = React.useState(null)
   const [loading, setloading] = React.useState(true)
   const [searchresults, setsearchresults] = React.useState([])
+  const [data, setdata] = React.useState({})
+  const router = useRouter()
+  const page = router.query.page ? router.query.page : 0
 
   const fetchTitle = async (id) => {
     await axios.get(`/api/v1/titles/${id}`).then(response => {
@@ -21,13 +25,23 @@ const TitleProvider = ({
     })
   }
 
-  const handleSearch = (query) => {
-    axios.get(`/api/v1/search?query=${query}`).then(response => {
+  const handleSearch = async (query) => {
+    await axios.get(`/api/v1/search?query=${query}`).then(response => {
       setsearchresults(response.data.items)
       setloading(false)
     }).catch(error => {
       setloading(false)
       console.log(error)
+    })
+  }
+
+  const fetchTitles = async () => {
+    await axios.get(`/api/v1/titles?page=${page}&per_page=20`).then(response => {
+      setdata(response.data)
+      setloading(false)
+    }).catch(err => {
+      console.log(err)
+      setloading(false)
     })
   }
 
@@ -41,7 +55,10 @@ const TitleProvider = ({
         setloading,
         searchresults,
         handleSearch,
-        setsearchresults
+        setsearchresults,
+        data,
+        setdata,
+        fetchTitles
       }}
     >
       {children}

@@ -13,10 +13,10 @@ export default function Search() {
   const { handleSearch, loading, searchresults, setsearchresults, setloading } = React.useContext(TitleContext)
 
   React.useEffect(() => {
+    setloading(true)
     handleSearch(query)
     return () => {
       setsearchresults([])
-      setloading(false)
     }
   }, [query])
 

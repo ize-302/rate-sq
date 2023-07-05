@@ -4,27 +4,18 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import NumberAbbreviate from 'number-abbreviate';
 import { TitlesList } from './shared/TitlesList';
+import { TitleContext } from '@/context/TitleContext';
 
 export const NewlyAdded = () => {
-  const [data, setdata] = React.useState({})
   const router = useRouter()
-  const [loading, setloading] = React.useState(true)
-  const page = router.query.page ? router.query.page : 0
+  const { fetchTitles, data, setdata, setloading, loading } = React.useContext(TitleContext)
 
 
   React.useEffect(() => {
     setloading(true)
-    axios.get(`/api/v1/titles?page=${page}&per_page=20`).then(response => {
-      setdata(response.data)
-      setloading(false)
-    }).catch(err => {
-      console.log(err)
-      setloading(false)
-    })
-
+    fetchTitles()
     return () => {
       setdata({})
-      setloading(false)
     }
   }, [router])
 

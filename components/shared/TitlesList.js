@@ -48,7 +48,7 @@ export const TitlesList = ({ loading, titles }) => {
         ))}
         {loading && Array(20).fill(0).map((_, index) => (
           <div key={index} className='flex flex-col gap-4'>
-            <Skeleton key={index} className='w-full min-h-[250px]' />
+            <Skeleton key={index} className='w-full min-h-[300px]' />
             <Skeleton key={index} className='h-4 w-2/3' />
           </div>
         )
