@@ -64,7 +64,7 @@ export const RateTitle = () => {
                   Rating:
                   <Rating
                     {...form.getInputProps('rating')}
-                    onChange={(value) => form.setFieldValue('rating', value)} fractions={2} defaultValue={form.values.rating} color='#6FDA86' size='md' />
+                    onChange={(value) => form.setFieldValue('rating', value)} fractions={1} defaultValue={form.values.rating} color='#6FDA86' size='md' />
                 </Group>
                 <div className='flex gap-2'>
                   <Textarea
