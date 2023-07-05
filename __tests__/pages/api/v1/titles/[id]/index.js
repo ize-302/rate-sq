@@ -2,7 +2,7 @@ import { createMocks } from "node-mocks-http";
 import titleHandler from "@/pages/api/v1/titles/[id]";
 import { supabase } from "@/supabase";
 
-describe('/api/v1/title/:id', () => {
+describe('/api/v1/titles/:id', () => {
   // fetch non existent theme
   it('should return 404 status code with error message', async () => {
     const { req, res } = createMocks({
@@ -28,7 +28,7 @@ describe('/api/v1/title/:id', () => {
     const { req, res } = createMocks({
       method: 'GET',
       query: {
-        id: 63247
+        id: 125988
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
