@@ -1,5 +1,5 @@
 import { supabase } from "@/supabase";
-import { filldata, getPagination, paginator } from "@/utils";
+import { fillTitleData, getPagination, paginator } from "@/utils";
 import { handleTokenVerification } from "@/utils/jwt.utils";
 
 export default async function titlesHandler(
@@ -17,7 +17,7 @@ export default async function titlesHandler(
         .select("*", { count: "exact" })
         .order("created_at", { ascending: false })
         .range(from, to)
-      const results = await filldata({ data: foundtitles.data })
+      const results = await fillTitleData({ data: foundtitles.data })
       return await res.status(200).send({
         items: results,
         ...paginator({ count: foundtitles.count, page, per_page, from, to })

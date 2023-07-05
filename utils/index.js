@@ -24,7 +24,7 @@ export const getPagination = ({ page, per_page }) => {
   return { from, to };
 };
 
-export const filldata = async ({ data }) => {
+export const fillTitleData = async ({ data }) => {
   const result = await Promise.all(
     data.map(async item => {
       const themoviedb_response = await axios.get(`https://api.themoviedb.org/3/tv/${item.id}`, {
@@ -46,7 +46,7 @@ export const filldata = async ({ data }) => {
       let total_responses = 0
       let total_ratings = 0
       let average_rating = 0
-      Array(5).fill(1).map((n, i) => {
+      Array(5).fill(1, 1, 5).map((n, i) => {
         const occurence = ratings.data.filter(item => Number(item.rating) === i + 1).length
         total_responses = total_responses + occurence
         total_ratings = total_ratings + ((i + 1) * occurence)
@@ -71,4 +71,25 @@ export const filldata = async ({ data }) => {
     if (!b.exists && a.exists) return -1;
     return 0;
   })
+}
+
+
+export const fillRatingData = async ({ data }) => {
+  const result = await Promise.all(
+    data.map(async item => {
+      const profile = await supabase
+        .from("profiles")
+        .select().single()
+        .eq("id", item.author)
+      const data_obj = {
+        ...item,
+        author: {
+          id: profile.data.id,
+          display_name: profile.data.display_name
+        }
+      }
+      return data_obj
+    })
+  )
+  return result
 }

@@ -58,7 +58,7 @@ const TitleProvider = ({
         setsearchresults,
         data,
         setdata,
-        fetchTitles
+        fetchTitles,
       }}
     >
       {children}

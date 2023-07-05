@@ -7,6 +7,7 @@ import { RouterTransition } from "@/components/RouterTransition";
 import TitleProvider from "@/context/titleContext";
 import UserProvider from "@/context/userContext";
 import DrawerProvider from "@/context/drawerContext";
+import RatingProvider from "@/context/ratingContext";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -20,9 +21,11 @@ export default function App({ Component, pageProps }) {
       <Notifications position="top-center" containerWidth={350} />
       <UserProvider>
         <TitleProvider>
-          <DrawerProvider>
-            <Component {...pageProps} />
-          </DrawerProvider>
+          <RatingProvider>
+            <DrawerProvider>
+              <Component {...pageProps} />
+            </DrawerProvider>
+          </RatingProvider>
         </TitleProvider>
       </UserProvider>
     </MantineProvider>
