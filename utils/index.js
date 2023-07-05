@@ -54,7 +54,7 @@ export const filldata = async ({ data }) => {
       average_rating = Number((total_ratings / total_responses).toFixed(1))
       const data_obj = {
         // title_id: item.id,
-        show_id: themoviedb_response.data.id,
+        id: themoviedb_response.data.id,
         name: item.name,
         backdrop_path: themoviedb_response.data.backdrop_path,
         poster_path: themoviedb_response.data.poster_path,

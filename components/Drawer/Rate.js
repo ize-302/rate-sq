@@ -2,8 +2,12 @@ import React from 'react'
 import { Button, Group, Text, Rating, Textarea, Accordion } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
+import { TitleContext } from '@/context/TitleContext';
+import { UserContext } from '@/context/userContext';
 
-export const Rate = ({ user, id }) => {
+export const Rate = () => {
+  const { item } = React.useContext(TitleContext)
+  const { user } = React.useContext(UserContext)
 
   const form = useForm({
     initialValues: {
