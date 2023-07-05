@@ -2,9 +2,11 @@ import React from 'react'
 import { TitleContext } from '@/context/titleContext'
 import { Blockquote, Rating, Skeleton, Text } from '@mantine/core'
 import Link from 'next/link'
+import { RatingContext } from '@/context/ratingContext'
 
 export const RatingsSection = () => {
-  const { fetchRatings, item, ratings, loading } = React.useContext(TitleContext)
+  const { item } = React.useContext(TitleContext)
+  const { fetchRatings, ratings, loading } = React.useContext(RatingContext)
 
   React.useEffect(() => {
     fetchRatings(item.id)

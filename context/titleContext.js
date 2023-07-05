@@ -1,4 +1,3 @@
-import { fillRatingData } from "@/utils";
 import axios from "axios";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -14,7 +13,6 @@ const TitleProvider = ({
   const [data, setdata] = React.useState({})
   const router = useRouter()
   const page = router.query.page ? router.query.page : 0
-  const [ratings, setratings] = React.useState([])
 
   const fetchTitle = async (id) => {
     await axios.get(`/api/v1/titles/${id}`).then(response => {
@@ -47,18 +45,6 @@ const TitleProvider = ({
     })
   }
 
-  const fetchRatings = async (title_id) => {
-    await axios.get(`/api/v1/titles/${title_id}/ratings`).then(async response => {
-      const result = await fillRatingData({ data: response.data.items })
-      setratings(result)
-      setloading(false)
-    }).catch(err => {
-      setratings([])
-      setloading(false)
-      console.log(err)
-    })
-  }
-
   return (
     <TitleContext.Provider
       value={{
@@ -73,8 +59,6 @@ const TitleProvider = ({
         data,
         setdata,
         fetchTitles,
-        fetchRatings,
-        ratings
       }}
     >
       {children}
