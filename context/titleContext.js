@@ -15,6 +15,7 @@ const TitleProvider = ({
   const page = router.query.page ? router.query.page : 0
 
   const fetchTitle = async (id) => {
+    setloading(true)
     await axios.get(`/api/v1/titles/${id}`).then(response => {
       setitem(response.data ? response.data : null)
       setloading(false)
@@ -26,6 +27,7 @@ const TitleProvider = ({
   }
 
   const handleSearch = async (query) => {
+    setloading(true)
     await axios.get(`/api/v1/search?query=${query}`).then(response => {
       setsearchresults(response.data.items)
       setloading(false)
@@ -36,6 +38,7 @@ const TitleProvider = ({
   }
 
   const fetchTitles = async () => {
+    setloading(true)
     await axios.get(`/api/v1/titles?page=${page}&per_page=20`).then(response => {
       setdata(response.data)
       setloading(false)
