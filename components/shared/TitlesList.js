@@ -2,9 +2,9 @@ import React from 'react'
 import { Avatar, Skeleton } from '@mantine/core'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
-import { useDisclosure } from '@mantine/hooks'
-import { MyDrawer } from '../Drawer/index'
-import { TitleContext } from '@/context/TitleContext'
+import { TitleDrawer } from '../TitleDrawer'
+import { TitleContext } from '@/context/titleContext'
+import { DrawerContext } from '@/context/drawerContext'
 
 const Item = ({ item, setdraweritem }) => {
   return (
@@ -31,13 +31,13 @@ const Item = ({ item, setdraweritem }) => {
 }
 
 export const TitlesList = ({ loading, titles }) => {
-  const [opened, { open, close }] = useDisclosure(false);
   const { setitem } = React.useContext(TitleContext)
+  const { open } = React.useContext(DrawerContext)
 
   return (
     <>
       <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
-        <MyDrawer opened={opened} open={open} close={close} />
+        <TitleDrawer />
 
         {!loading && titles?.map((item, index) => (
           <Item key={index} item={item}

@@ -1,4 +1,4 @@
-import { TitleContext } from '@/context/TitleContext';
+import { TitleContext } from '@/context/titleContext';
 import { ACCESS_TOKEN } from '@/utils/constants';
 import { getTokenFromCookies } from '@/utils/cookies.utils';
 import { Button, TextInput } from '@mantine/core'

@@ -4,10 +4,12 @@ import { Drawer, Text, } from '@mantine/core';
 import { RateTitle } from './RateTitle';
 import { Media } from './Media';
 import { RatingsSection } from './RatingsSection';
-import { TitleContext } from '@/context/TitleContext';
+import { TitleContext } from '@/context/titleContext';
+import { DrawerContext } from '@/context/drawerContext';
 
-export const MyDrawer = ({ opened, open, close }) => {
-  const { item, loading } = React.useContext(TitleContext)
+export const TitleDrawer = () => {
+  const { item } = React.useContext(TitleContext)
+  const { opened, close } = React.useContext(DrawerContext)
 
   return (
     <>

@@ -1,10 +1,9 @@
 import React from 'react'
 import { Text, Pagination } from '@mantine/core';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import NumberAbbreviate from 'number-abbreviate';
 import { TitlesList } from './shared/TitlesList';
-import { TitleContext } from '@/context/TitleContext';
+import { TitleContext } from '@/context/titleContext';
 
 export const NewlyAdded = () => {
   const router = useRouter()

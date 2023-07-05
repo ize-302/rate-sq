@@ -2,19 +2,24 @@ import React from 'react'
 import { Button, Group, Text, Rating, Textarea, Accordion } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
-import { TitleContext } from '@/context/TitleContext';
+import { TitleContext } from '@/context/titleContext';
 import { UserContext } from '@/context/userContext';
 import axios from 'axios';
 import { getTokenFromCookies } from '@/utils/cookies.utils';
 import { ACCESS_TOKEN } from '@/utils/constants';
 import { IconCheck } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
+import { useRouter } from 'next/router';
+import { DrawerContext } from '@/context/drawerContext';
 
 export const RateTitle = () => {
-  const { item, fetchTitles } = React.useContext(TitleContext)
+  const { item, fetchTitles, handleSearch } = React.useContext(TitleContext)
+  const { close } = React.useContext(DrawerContext)
   const { user } = React.useContext(UserContext)
   const token = getTokenFromCookies(ACCESS_TOKEN)
   const [loading, setloading] = React.useState(false)
+  const router = useRouter()
+  const { query } = router.query;
 
   const form = useForm({
     initialValues: {
@@ -37,7 +42,8 @@ export const RateTitle = () => {
       }
     }).then(response => {
       setloading(false)
-      fetchTitles()
+      router?.pathname === '/search' ? handleSearch(query) : fetchTitles()
+      close()
       notifications.show({
         title: response.data.success,
         message: "",
