@@ -1,4 +1,4 @@
-import { filldata } from '@/utils'
+import { fillTitleData } from '@/utils'
 import axios from 'axios'
 
 export default async function filmSearchHandler(
@@ -13,7 +13,7 @@ export default async function filmSearchHandler(
       }
     })
     const filtered = response.data.results.filter(item => item.media_type === 'tv')
-    const results = await filldata({ data: filtered, fromsearch: true })
+    const results = await fillTitleData({ data: filtered })
     return res.status(200).send({ items: results })
   } catch (error) {
     console.log(error)
