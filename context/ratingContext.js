@@ -1,23 +1,25 @@
 import { fillRatingData } from "@/utils";
-import axios from "axios";
 import * as React from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export const RatingContext = React.createContext(null);
 
 const RatingProvider = ({
   children,
 }) => {
-  const [ratings, setratings] = React.useState([])
+  const [ratings, setratings] = React.useState({})
   const [loading, setloading] = React.useState(true)
+  const router = useRouter()
+  const page = router.query.page ? router.query.page : 1
 
-  const fetchRatings = async (title_id) => {
+  const fetchUserRatings = async (user_id) => {
     setloading(true)
-    await axios.get(`/api/v1/titles/${title_id}/ratings`).then(async response => {
-      const result = await fillRatingData({ data: response.data.items })
-      setratings(result)
+    await axios.get(`/api/v1/user/${user_id}/ratings?page=${page}&per_page=20`).then(async response => {
+      setratings(response.data)
       setloading(false)
     }).catch(err => {
-      setratings([])
+      setratings({})
       setloading(false)
       console.log(err)
     })
@@ -26,9 +28,10 @@ const RatingProvider = ({
   return (
     <RatingContext.Provider
       value={{
-        fetchRatings,
         ratings,
-        loading
+        loading,
+        fetchUserRatings,
+        setloading
       }}
     >
       {children}

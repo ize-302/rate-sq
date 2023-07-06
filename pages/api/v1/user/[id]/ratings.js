@@ -1,5 +1,5 @@
 import { supabase } from "@/supabase";
-import { getPagination, paginator } from "@/utils";
+import { fillRatingData, getPagination, paginator } from "@/utils";
 
 export default async function userRatingsHandler(
   req,
@@ -17,8 +17,9 @@ export default async function userRatingsHandler(
         .select("*", { count: "exact" }).eq("author", id)
         .order("updated_at", { ascending: false })
         .range(from, to)
+      const result = await fillRatingData({ data: foundratings.data })
       return await res.status(200).send({
-        items: foundratings.data,
+        items: result,
         ...paginator({ count: foundratings.count, page, per_page, from, to })
       })
     } catch (error) {
