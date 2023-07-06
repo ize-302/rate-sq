@@ -24,19 +24,19 @@ const Item = ({ item, setdraweritem }) => {
           </div>
           <Avatar className='rounded-lg bg-secondary h-[340px] relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
         </LazyLoad>
-        <Link href={`/tv/${item.id}`} className='font-semibold mt-2'>{item.name}</Link>
+        <Link href={`/tv/${item.id}`} className='font-semibold mt-2'>{item.name} opening title</Link>
       </div>
     </>
   )
 }
 
-export const TitlesList = ({ loading, titles }) => {
+export const TitlesList = ({ loading, titles, cols_class = 'grid-cols-5' }) => {
   const { setitem } = React.useContext(TitleContext)
   const { open } = React.useContext(DrawerContext)
 
   return (
     <>
-      <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
+      <div className={`grid ${cols_class} gap-10`}>
         <TitleDrawer />
 
         {!loading && titles?.map((item, index) => (
