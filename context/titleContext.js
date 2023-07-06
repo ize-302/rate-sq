@@ -11,6 +11,7 @@ const TitleProvider = ({
   const [loading, setloading] = React.useState(true)
   const [searchresults, setsearchresults] = React.useState([])
   const [data, setdata] = React.useState({})
+  const [usertitlesdata, setusertitlesdata] = React.useState({})
   const router = useRouter()
   const page = router.query.page ? router.query.page : 0
 
@@ -39,8 +40,19 @@ const TitleProvider = ({
 
   const fetchTitles = async () => {
     setloading(true)
-    await axios.get(`/api/v1/titles?page=${page}&per_page=20`).then(response => {
+    await axios.get(`/api/v1/titles?page=${page}&per_page=10`).then(response => {
       setdata(response.data)
+      setloading(false)
+    }).catch(err => {
+      console.log(err)
+      setloading(false)
+    })
+  }
+
+  const fetchUserTitles = async (user_id) => {
+    setloading(true)
+    await axios.get(`/api/v1/user/${user_id}/titles?page=${page}&per_page=10`).then(response => {
+      setusertitlesdata(response.data)
       setloading(false)
     }).catch(err => {
       console.log(err)
@@ -62,6 +74,8 @@ const TitleProvider = ({
         data,
         setdata,
         fetchTitles,
+        usertitlesdata,
+        fetchUserTitles
       }}
     >
       {children}
