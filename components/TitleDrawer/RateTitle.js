@@ -11,6 +11,7 @@ import { IconCheck } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { DrawerContext } from '@/context/drawerContext';
+import { supabase } from '@/supabase';
 
 export const RateTitle = () => {
   const { item, fetchTitles, handleSearch } = React.useContext(TitleContext)
@@ -20,6 +21,7 @@ export const RateTitle = () => {
   const [loading, setloading] = React.useState(false)
   const router = useRouter()
   const { query } = router.query;
+  const [is_rated, setis_rated] = React.useState(false)
 
   const form = useForm({
     initialValues: {
@@ -30,6 +32,19 @@ export const RateTitle = () => {
       rating: (value) => value ? null : 'Add a rating',
     },
   });
+
+  const isRated = async () => {
+    const result = await supabase.from('ratings').select("*", { count: 'exact' }).eq('author', user.id).eq('show_id', item.id)
+    setis_rated(result.count ? true : false)
+  }
+
+  React.useEffect(() => {
+    isRated()
+    return () => {
+      setis_rated(false)
+    }
+  }, [item])
+
 
   const handlerating = (values) => {
     setloading(true)
@@ -62,10 +77,10 @@ export const RateTitle = () => {
       <Accordion defaultValue="customization">
         <Accordion.Item value="customization" className='mt-5 bg-green-100 border border-green-400 rounded-lg'>
           <Accordion.Control className='hover:bg-transparent'>
-            <Text className='font-semibold'>Leave a rating</Text>
+            <Text className='font-semibold'> {is_rated ? 'Your rating' : 'Leave a rating'}</Text>
           </Accordion.Control>
           <Accordion.Panel className='border-t border-green-400 py-2'>
-            {user ? (
+            {(user && !is_rated) && (
               <form onSubmit={form.onSubmit((values) => handlerating(values))} className='flex flex-col gap-4  mt-0 bg-green-100'>
                 <Group className='items-center'>
                   Rating:
@@ -84,7 +99,13 @@ export const RateTitle = () => {
                   <Button loading={loading} disabled={!form.values.rating} type='submit' size='sm' className='bg-secondary border-0 hover:bg-green-700 w-32'>Submit</Button>
                 </div>
               </form>
-            ) : (
+            )}
+
+            {(user && is_rated) && (
+              <>ss</>
+            )}
+
+            {!user && (
               <>
                 <div className='flex gap-2 text-red-600'>
                   You must be signed in to give a rating.

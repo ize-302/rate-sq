@@ -15,7 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 16.x, 14.x]
+        node-version: [18.x, 16.x]
+        # node-version: [18.x, 16.x, 14.x] comment out cos it keeps building nonstop on 14.x
 
     steps:
       - name: Checkout repository
