@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Group, Text, Rating, Textarea, Accordion } from '@mantine/core';
+import { Button, Group, Text, Rating, Textarea, Accordion, Blockquote } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
 import { TitleContext } from '@/context/titleContext';
@@ -73,50 +73,49 @@ export const RateTitle = () => {
 
   return (
     <>
+      {is_rated && (
+        <div className='bg-blue-50 border border-blue-400 text-blue-400 p-3 rounded-md mt-4'>You have already rated this title</div>
+      )}
+      {!is_rated && (
+        <Accordion defaultValue="customization">
+          <Accordion.Item value="customization" className='mt-5 bg-green-100 border border-green-400 rounded-lg'>
+            <Accordion.Control className='hover:bg-transparent'>
+              <Text className='font-semibold'>Leave a rating</Text>
+            </Accordion.Control>
+            <Accordion.Panel className='border-t border-green-400 py-2'>
+              {(user && !is_rated) && (
+                <form onSubmit={form.onSubmit((values) => handlerating(values))} className='flex flex-col gap-4  mt-0 bg-green-100'>
+                  <Group className='items-center'>
+                    Rating:
+                    <Rating
+                      {...form.getInputProps('rating')}
+                      onChange={(value) => form.setFieldValue('rating', value)} fractions={1} defaultValue={form.values.rating} color='#6FDA86' size='md' />
+                  </Group>
+                  <div className='flex gap-2'>
+                    <Textarea
+                      className='w-full'
+                      autosize
+                      placeholder="Leave a comment (optional)"
+                      onChange={(value) => form.setFieldValue('comment', value)}
+                      {...form.getInputProps('comment')}
+                    />
+                    <Button loading={loading} disabled={!form.values.rating} type='submit' size='sm' className='bg-secondary border-0 hover:bg-green-700 w-32'>Submit</Button>
+                  </div>
+                </form>
+              )}
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+      )}
 
-      <Accordion defaultValue="customization">
-        <Accordion.Item value="customization" className='mt-5 bg-green-100 border border-green-400 rounded-lg'>
-          <Accordion.Control className='hover:bg-transparent'>
-            <Text className='font-semibold'> {is_rated ? 'Your rating' : 'Leave a rating'}</Text>
-          </Accordion.Control>
-          <Accordion.Panel className='border-t border-green-400 py-2'>
-            {(user && !is_rated) && (
-              <form onSubmit={form.onSubmit((values) => handlerating(values))} className='flex flex-col gap-4  mt-0 bg-green-100'>
-                <Group className='items-center'>
-                  Rating:
-                  <Rating
-                    {...form.getInputProps('rating')}
-                    onChange={(value) => form.setFieldValue('rating', value)} fractions={1} defaultValue={form.values.rating} color='#6FDA86' size='md' />
-                </Group>
-                <div className='flex gap-2'>
-                  <Textarea
-                    className='w-full'
-                    autosize
-                    placeholder="Leave a comment (optional)"
-                    onChange={(value) => form.setFieldValue('comment', value)}
-                    {...form.getInputProps('comment')}
-                  />
-                  <Button loading={loading} disabled={!form.values.rating} type='submit' size='sm' className='bg-secondary border-0 hover:bg-green-700 w-32'>Submit</Button>
-                </div>
-              </form>
-            )}
-
-            {(user && is_rated) && (
-              <>ss</>
-            )}
-
-            {!user && (
-              <>
-                <div className='flex gap-2 text-red-600'>
-                  You must be signed in to give a rating.
-                  <Link href='/login' className='text-secondary font-bold'>Continute to Log in</Link>
-                </div>
-              </>
-            )}
-          </Accordion.Panel>
-        </Accordion.Item>
-      </Accordion>
-
+      {!user && (
+        <>
+          <div className='flex gap-2 text-red-600'>
+            You must be signed in to give a rating.
+            <Link href='/login' className='text-secondary font-bold'>Continute to Log in</Link>
+          </div>
+        </>
+      )}
     </>
   )
 }
