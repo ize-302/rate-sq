@@ -34,7 +34,7 @@ export default async function titleRatingsHandler(
       }
 
       await supabase.from('ratings').insert([
-        { rating: Number(rating), show_id: Number(id), comment, author: isAuthorized.id }
+        { rating: Number(rating), show_id: Number(id), comment, author: isAuthorized?.id }
       ]).select("*")
         .single();
       // delete test data

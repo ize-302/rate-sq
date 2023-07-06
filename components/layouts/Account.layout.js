@@ -12,7 +12,7 @@ export default function AccountLayout({ children, title }) {
 
   const signOut = () => {
     removeTokenFromCookies()
-    router.reload()
+    router.push('/')
   }
 
   const classes = (path) => `flex items-center p-4 text-secondary hover:bg-gray-100 gap-2 ${router.pathname == path ? "bg-green-50 border-r-4 border-primary" : ""}`
