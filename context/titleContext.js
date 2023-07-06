@@ -9,11 +9,13 @@ const TitleProvider = ({
 }) => {
   const [item, setitem] = React.useState(null)
   const [loading, setloading] = React.useState(true)
+  const [loadingratings, setloadingratings] = React.useState(true)
   const [searchresults, setsearchresults] = React.useState([])
   const [data, setdata] = React.useState({})
   const [usertitlesdata, setusertitlesdata] = React.useState({})
+  const [ratings, setratings] = React.useState([])
   const router = useRouter()
-  const page = router.query.page ? router.query.page : 0
+  const page = router.query.page ? router.query.page : 1
 
   const fetchTitle = async (id) => {
     setloading(true)
@@ -24,6 +26,19 @@ const TitleProvider = ({
       setitem(null)
       setloading(false)
       console.log(err)
+    })
+  }
+
+
+  const fetchTitleRatings = async (show_id) => {
+    setloadingratings(true)
+    await axios.get(`/api/v1/titles/${show_id}/ratings`).then(response => {
+      setratings(response.data)
+      setloadingratings(false)
+    }).catch(err => {
+      setratings([])
+      console.log(err)
+      setloadingratings(false)
     })
   }
 
@@ -40,7 +55,7 @@ const TitleProvider = ({
 
   const fetchTitles = async () => {
     setloading(true)
-    await axios.get(`/api/v1/titles?page=${page}&per_page=10`).then(response => {
+    await axios.get(`/api/v1/titles?page=${page}&per_page=20`).then(response => {
       setdata(response.data)
       setloading(false)
     }).catch(err => {
@@ -51,7 +66,7 @@ const TitleProvider = ({
 
   const fetchUserTitles = async (user_id) => {
     setloading(true)
-    await axios.get(`/api/v1/user/${user_id}/titles?page=${page}&per_page=10`).then(response => {
+    await axios.get(`/api/v1/user/${user_id}/titles?page=${page}&per_page=20`).then(response => {
       setusertitlesdata(response.data)
       setloading(false)
     }).catch(err => {
@@ -59,6 +74,8 @@ const TitleProvider = ({
       setloading(false)
     })
   }
+
+
 
   return (
     <TitleContext.Provider
@@ -75,7 +92,11 @@ const TitleProvider = ({
         setdata,
         fetchTitles,
         usertitlesdata,
-        fetchUserTitles
+        fetchUserTitles,
+        fetchTitleRatings,
+        ratings,
+        loadingratings,
+        setloadingratings
       }}
     >
       {children}

@@ -53,7 +53,6 @@ export const fillTitleData = async ({ data }) => {
       })
       average_rating = Number((total_ratings / total_responses).toFixed(1))
       const data_obj = {
-        // title_id: item.id,
         id: themoviedb_response.data.id,
         name: item.name,
         backdrop_path: themoviedb_response.data.backdrop_path,
@@ -77,15 +76,25 @@ export const fillTitleData = async ({ data }) => {
 export const fillRatingData = async ({ data }) => {
   const result = await Promise.all(
     data.map(async item => {
+      const themoviedb_response = await axios.get(`https://api.themoviedb.org/3/tv/${item.show_id}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
+        }
+      })
       const profile = await supabase
         .from("profiles")
         .select().single()
         .eq("id", item.author)
       const data_obj = {
         ...item,
+        show: {
+          id: themoviedb_response.data.id,
+          name: themoviedb_response.data.original_name,
+          poster_path: themoviedb_response.data.poster_path,
+        },
         author: {
           id: profile.data.id,
-          display_name: profile.data.display_name
+          display_name: profile.data.display_name,
         }
       }
       return data_obj

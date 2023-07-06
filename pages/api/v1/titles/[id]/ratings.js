@@ -1,4 +1,5 @@
 import { supabase } from "@/supabase";
+import { fillRatingData } from "@/utils";
 import { handleTokenVerification } from "@/utils/jwt.utils";
 
 export default async function titleRatingsHandler(
@@ -14,8 +15,9 @@ export default async function titleRatingsHandler(
         .select("*", { count: "exact" })
         .eq("show_id", id)
         .order("updated_at", { ascending: false })
+      const result = await fillRatingData({ data: foundratings.data })
       return await res.status(200).send({
-        items: foundratings.data
+        items: result
       })
     } catch (error) {
       console.log(error)
