@@ -5,6 +5,7 @@ module.exports = {
     "^@/pages(.*)$": "<rootDir>/pages/$1",
     "^@/components(.*)$": "<rootDir>/components/$1",
     "^@/supabase": "<rootDir>/supabase.js",
+    "^@/neon": "<rootDir>/neon.js",
   },
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest"

@@ -1,5 +1,6 @@
-import { supabase } from "@/supabase";
 import bcrypt from 'bcrypt'
+import { v4 as uuidv4 } from 'uuid';
+import sql from "@/neon";
 
 export default async function signupHandler(
   req,
@@ -8,24 +9,20 @@ export default async function signupHandler(
   if (req.method === 'POST') {
     const { email, display_name, password } = req.body
     try {
-      const { data } = await supabase
-        .from("profiles")
-        .select()
-        .eq("email", email)
-        .single();
-      if (data) return res.status(409).send({ error: 'Account already exist' })
-      // continue 
+      // does user already exist in profiles table?
+      const profiles = await sql`SELECT * FROM profiles WHERE email = ${email}`;
+      if (profiles.length > 0) return res.status(409).send({ error: 'Account already exist' })
+
       const salt = await bcrypt.genSaltSync(10);
       const hash = await bcrypt.hashSync(password, salt);
-      await supabase.from('profiles').insert([
-        { email, display_name, password: hash, salt }
-      ]).select("*")
-        .single();
-      // delete test-user-again@example.com user after testing
+      const id = await uuidv4()
+      await sql`INSERT INTO profiles (id, email, display_name, password, salt) VALUES (${id}, ${email}, ${display_name}, ${hash}, ${salt})`;
+
+      // deletes account created via test
       if (email === 'test-user-again@example.com') {
-        await supabase.from('profiles').delete().eq("email", email)
-          .single();
+        await sql`DELETE FROM profiles WHERE email = ${email}`
       }
+
       res.status(200).send({ success: 'Account has been created. Log in to continue' })
     } catch (error) {
       console.log(error)

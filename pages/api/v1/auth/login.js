@@ -1,7 +1,7 @@
-import { supabase } from "@/supabase";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/utils/constants";
 import { generateToken } from "@/utils/jwt.utils";
 import bcrypt from 'bcrypt'
+import sql from "@/neon";
 
 export default async function loginHandler(
   req,
@@ -10,26 +10,27 @@ export default async function loginHandler(
   if (req.method === 'POST') {
     const { email, password } = req.body
     try {
-      const founduser = await supabase
-        .from("profiles")
-        .select()
-        .eq("email", email)
-        .single();
       const errorMessage = 'Incorrect login details, try again'
-      if (!founduser.data) return res.status(401).send({ error: errorMessage })
-      // continue 
-      const match = await bcrypt.compare(password, founduser.data.password);
+
+      const profiles = await sql`SELECT * FROM profiles WHERE email=${email}`
+      if (profiles.length === 0) return res.status(401).send({ error: errorMessage })
+
+      const match = await bcrypt.compare(password, profiles[0]['password']);
       if (!match) return res.status(401).send({ error: errorMessage })
-      // // generate new salt
+      // generate new salt
       const salt = await bcrypt.genSaltSync(10);
       const hash = await bcrypt.hashSync(password, salt);
-      await supabase.from('profiles').update(
-        { password: hash, salt }
-      ).eq("email", email)
+
+      // update user
+      await sql`UPDATE profiles SET password = ${hash}, salt = ${salt} WHERE email = ${email}`
+
       // generate token
-      const access_token = await generateToken(founduser.data, ACCESS_TOKEN)
-      const refresh_token = await generateToken(founduser.data, REFRESH_TOKEN)
+      const access_token = await generateToken(profiles[0], ACCESS_TOKEN)
+      const refresh_token = await generateToken(profiles[0], REFRESH_TOKEN)
+
+      // // res.waitUntil(pool.end());
       return res.status(200).send({ refresh_token, access_token })
+      return res.status(200).send({})
     } catch (error) {
       console.log('err->', error)
       return res.status(500).send({ error: 'Something went wrong' })
