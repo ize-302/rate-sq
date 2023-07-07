@@ -2,9 +2,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import * as React from "react";
 
-export const TitleContext = React.createContext(null);
+export const ShowContext = React.createContext(null);
 
-const TitleProvider = ({
+const ShowProvider = ({
   children,
 }) => {
   const [item, setitem] = React.useState(null)
@@ -12,14 +12,14 @@ const TitleProvider = ({
   const [loadingratings, setloadingratings] = React.useState(true)
   const [searchresults, setsearchresults] = React.useState([])
   const [data, setdata] = React.useState({})
-  const [usertitlesdata, setusertitlesdata] = React.useState({})
+  const [usershowsdata, setusershowsdata] = React.useState({})
   const [ratings, setratings] = React.useState([])
   const router = useRouter()
   const page = router.query.page ? router.query.page : 1
 
-  const fetchTitle = async (id) => {
+  const fetchShow = async (id) => {
     setloading(true)
-    await axios.get(`/api/v1/titles/${id}`).then(response => {
+    await axios.get(`/api/v1/shows/${id}`).then(response => {
       setitem(response.data ? response.data : null)
       setloading(false)
     }).catch(err => {
@@ -30,9 +30,9 @@ const TitleProvider = ({
   }
 
 
-  const fetchTitleRatings = async (show_id) => {
+  const fetchShowRatings = async (show_id) => {
     setloadingratings(true)
-    await axios.get(`/api/v1/titles/${show_id}/ratings`).then(response => {
+    await axios.get(`/api/v1/shows/${show_id}/ratings`).then(response => {
       setratings(response.data)
       setloadingratings(false)
     }).catch(err => {
@@ -53,9 +53,9 @@ const TitleProvider = ({
     })
   }
 
-  const fetchTitles = async () => {
+  const fetchShows = async () => {
     setloading(true)
-    await axios.get(`/api/v1/titles?page=${page}&per_page=20`).then(response => {
+    await axios.get(`/api/v1/shows?page=${page}&per_page=20`).then(response => {
       setdata(response.data)
       setloading(false)
     }).catch(err => {
@@ -64,10 +64,10 @@ const TitleProvider = ({
     })
   }
 
-  const fetchUserTitles = async (user_id) => {
+  const fetchUserShows = async (user_id) => {
     setloading(true)
-    await axios.get(`/api/v1/user/${user_id}/titles?page=${page}&per_page=20`).then(response => {
-      setusertitlesdata(response.data)
+    await axios.get(`/api/v1/user/${user_id}/shows?page=${page}&per_page=20`).then(response => {
+      setusershowsdata(response.data)
       setloading(false)
     }).catch(err => {
       console.log(err)
@@ -78,11 +78,11 @@ const TitleProvider = ({
 
 
   return (
-    <TitleContext.Provider
+    <ShowContext.Provider
       value={{
         item,
         setitem,
-        fetchTitle,
+        fetchShow,
         loading,
         setloading,
         searchresults,
@@ -90,18 +90,18 @@ const TitleProvider = ({
         setsearchresults,
         data,
         setdata,
-        fetchTitles,
-        usertitlesdata,
-        fetchUserTitles,
-        fetchTitleRatings,
+        fetchShows,
+        usershowsdata,
+        fetchUserShows,
+        fetchShowRatings,
         ratings,
         loadingratings,
         setloadingratings
       }}
     >
       {children}
-    </TitleContext.Provider>
+    </ShowContext.Provider>
   );
 };
 
-export default TitleProvider;
+export default ShowProvider;

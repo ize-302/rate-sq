@@ -1,4 +1,4 @@
-import { TitleContext } from '@/context/titleContext';
+import { ShowContext } from '@/context/showContext';
 import { ACCESS_TOKEN } from '@/utils/constants';
 import { getTokenFromCookies } from '@/utils/cookies.utils';
 import { Button, TextInput } from '@mantine/core'
@@ -12,7 +12,7 @@ import React from 'react'
 export const Media = ({ item }) => {
   const token = getTokenFromCookies(ACCESS_TOKEN)
   const [loading, setloading] = React.useState(false)
-  const { fetchTitle, handleSearch } = React.useContext(TitleContext)
+  const { fetchShow, handleSearch } = React.useContext(ShowContext)
   const router = useRouter()
   const { query } = router.query
 
@@ -27,7 +27,7 @@ export const Media = ({ item }) => {
 
   const handlesubmission = (values) => {
     setloading(true)
-    axios.post(`/api/v1/titles`, {
+    axios.post(`/api/v1/shows`, {
       embed_code: values.embed_code,
       id: item?.id,
       name: item?.name,
@@ -37,7 +37,7 @@ export const Media = ({ item }) => {
       },
     }).then(response => {
       setloading(false)
-      fetchTitle(item.id)
+      fetchShow(item.id)
       handleSearch(query)
       notifications.show({
         title: response.data.success,
@@ -54,7 +54,7 @@ export const Media = ({ item }) => {
   return (
     <div>
       {item?.exists && (
-        <iframe className='aspect-video  w-full h-full rounded-md' src={`https://www.youtube.com/embed/${item?.embed_code}?rel=0`} title={item?.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe className='aspect-video  w-full h-full rounded-md' src={`https://www.youtube.com/embed/${item?.embed_code}?rel=0`} show={item?.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       )}
       {!item?.exists && (
         <div>
@@ -67,7 +67,7 @@ export const Media = ({ item }) => {
             <div className='mt-2'>
               Preview:
               {form.values.embed_code && (
-                <iframe className='aspect-video mt-2 w-full h-full rounded-md' src={`https://www.youtube.com/embed/${form.values.embed_code}?rel=0`} title={name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe className='aspect-video mt-2 w-full h-full rounded-md' src={`https://www.youtube.com/embed/${form.values.embed_code}?rel=0`} show={name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               )}
             </div>
           </form>

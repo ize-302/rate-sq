@@ -1,22 +1,23 @@
 import { createMocks } from "node-mocks-http";
-import titlesHandler from '@/pages/api/v1/titles';
+import showRatingsHandler from '@/pages/api/v1/shows/[id]/ratings';
 
-
-describe('/api/v1/titles', () => {
-  // ADD A THEME
+describe('/api/v1/ratings', () => {
+  // ADD RATING
   it('Returns 400 status code error and error message when some fields are missing', async () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        id: 'test-id',
-        name: '',
-        embed_code: ''
+        rating: null,
+        comment: '',
+      },
+      query: {
+        id: 1,
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await titlesHandler(req, res);
+    await showRatingsHandler(req, res);
     expect(res._getStatusCode()).toBe(400);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({
@@ -26,19 +27,21 @@ describe('/api/v1/titles', () => {
   })
 
 
-  it('Creates a track and returns 201 status code and success message when all fields are availble', async () => {
+  it('Add rating and returns 201 status code and success message if all fields are available', async () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        id: 'test-id',
-        name: 'name here',
-        embed_code: 'embed_code here'
+        rating: 4,
+        comment: 'my comment',
+      },
+      query: {
+        id: 1,
       },
       headers: {
         authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
       }
     });
-    await titlesHandler(req, res);
+    await showRatingsHandler(req, res);
     expect(res._getStatusCode()).toBe(201);
     expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
       expect.objectContaining({

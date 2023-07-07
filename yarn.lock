@@ -2558,7 +2558,7 @@ default-browser@^4.0.0:
     bundle-name "^3.0.0"
     default-browser-id "^3.0.0"
     execa "^7.1.1"
-    titleize "^3.0.0"
+    showize "^3.0.0"
 
 define-lazy-prop@^3.0.0:
   version "3.0.0"
@@ -5460,9 +5460,9 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-titleize@^3.0.0:
+showize@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.yarnpkg.com/titleize/-/titleize-3.0.0.tgz#71c12eb7fdd2558aa8a44b0be83b8a76694acd53"
+  resolved "https://registry.yarnpkg.com/showize/-/showize-3.0.0.tgz#71c12eb7fdd2558aa8a44b0be83b8a76694acd53"
   integrity sha512-KxVu8EYHDPBdUYdKZdKtU2aj2XfEx9AfjXxE/Aj0vT06w2icA09Vus1rh6eSu1y01akYg6BjIK/hxyLJINoMLQ==
 
 tmpl@1.0.5:

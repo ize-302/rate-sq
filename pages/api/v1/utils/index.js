@@ -2,7 +2,7 @@
 import sql from "@/neondb";
 import axios from "axios";
 
-export const fillTitleData = async ({ data }) => {
+export const fillShowData = async ({ data }) => {
   const result = await Promise.all(
     data.map(async item => {
       const themoviedb_response = await axios.get(`https://api.themoviedb.org/3/tv/${item.id}`, {
@@ -11,7 +11,7 @@ export const fillTitleData = async ({ data }) => {
         }
       })
       const ratings = await sql`SELECT * FROM ratings WHERE show_id = ${item.id}`;
-      const titles = await sql`SELECT * FROM titles WHERE id = ${item.id}`;
+      const shows = await sql`SELECT * FROM shows WHERE id = ${item.id}`;
       let total_responses = 0
       let total_ratings = 0
       let average_rating = 0
@@ -26,10 +26,10 @@ export const fillTitleData = async ({ data }) => {
         name: item.name,
         backdrop_path: themoviedb_response.data.backdrop_path,
         poster_path: themoviedb_response.data.poster_path,
-        embed_code: titles[0] ? titles[0].embed_code : null,
+        embed_code: shows[0] ? shows[0].embed_code : null,
         added_by: item.added_by,
         ratings: average_rating,
-        exists: !titles[0] ? false : true
+        exists: !shows[0] ? false : true
       }
       return data_obj
     })

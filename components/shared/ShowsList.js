@@ -2,8 +2,8 @@ import React from 'react'
 import { Avatar, Skeleton } from '@mantine/core'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
-import { TitleDrawer } from '../TitleDrawer'
-import { TitleContext } from '@/context/titleContext'
+import { ShowDrawer } from '../ShowDrawer'
+import { ShowContext } from '@/context/showContext'
 import { DrawerContext } from '@/context/drawerContext'
 
 const Item = ({ item, setdraweritem }) => {
@@ -24,22 +24,22 @@ const Item = ({ item, setdraweritem }) => {
           </div>
           <Avatar className='rounded-xl bg-secondary h-[340px] relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
         </LazyLoad>
-        <Link href={`/tv/${item.id}`} className='font-semibold mt-2'>{item.name} opening title</Link>
+        <Link href={`/tv/${item.id}`} className='font-semibold mt-2'>{item.name} opening show</Link>
       </div>
     </>
   )
 }
 
-export const TitlesList = ({ loading, titles, cols_class = 'grid-cols-5' }) => {
-  const { setitem } = React.useContext(TitleContext)
+export const ShowsList = ({ loading, shows, cols_class = 'grid-cols-5' }) => {
+  const { setitem } = React.useContext(ShowContext)
   const { open } = React.useContext(DrawerContext)
 
   return (
     <>
       <div className={`grid ${cols_class} gap-10`}>
-        <TitleDrawer />
+        <ShowDrawer />
 
-        {!loading && titles?.map((item, index) => (
+        {!loading && shows?.map((item, index) => (
           <Item key={index} item={item}
             setdraweritem={(payload) => {
               setitem(payload)

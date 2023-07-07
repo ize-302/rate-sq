@@ -1,14 +1,14 @@
 import React from 'react'
-import { TitleContext } from '@/context/titleContext'
+import { ShowContext } from '@/context/showContext'
 import { Blockquote, Rating, Skeleton, Text } from '@mantine/core'
 import Link from 'next/link'
 
 export const RatingsSection = () => {
-  const { item } = React.useContext(TitleContext)
-  const { fetchTitleRatings, ratings, loadingratings } = React.useContext(TitleContext)
+  const { item } = React.useContext(ShowContext)
+  const { fetchShowRatings, ratings, loadingratings } = React.useContext(ShowContext)
 
   React.useEffect(() => {
-    fetchTitleRatings(item.id)
+    fetchShowRatings(item.id)
     return () => {
     }
   }, [item]) // eslint-disable-line

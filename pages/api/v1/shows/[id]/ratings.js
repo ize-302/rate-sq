@@ -3,7 +3,7 @@ import { fillRatingData } from '@/pages/api/v1/utils'
 import sql from "@/neondb";
 import { v4 as uuidv4 } from 'uuid';
 
-export default async function titleRatingsHandler(
+export default async function showRatingsHandler(
   req,
   res
 ) {
@@ -33,7 +33,7 @@ export default async function titleRatingsHandler(
       const uid = await uuidv4() // generate id for rating
       await sql`INSERT INTO ratings (id, rating, show_id, comment, author) VALUES (${uid}, ${Number(rating)}, ${Number(id)}, ${comment}, ${isAuthorized.id})`
 
-      // deletes title ratings created during test
+      // deletes show ratings created during test
       if (id === 1) {
         await sql`DELETE FROM ratings WHERE show_id = ${id}`
       }

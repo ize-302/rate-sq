@@ -7,7 +7,7 @@ import { IconDeviceTvOld, IconLogout, IconStars, IconUser } from '@tabler/icons-
 import { removeTokenFromCookies } from '@/utils/cookies.utils'
 import { useRouter } from 'next/router'
 
-export default function AccountLayout({ children, title }) {
+export default function AccountLayout({ children, show }) {
   const router = useRouter()
 
   const signOut = () => {
@@ -30,8 +30,8 @@ export default function AccountLayout({ children, title }) {
                 <Link href="/account/ratings" className={classes('/account/ratings')}>
                   <IconStars className='text-secondary' size={20} /> My ratings
                 </Link>
-                <Link href="/account/titles" className={classes('/account/titles')}>
-                  <IconDeviceTvOld className='text-secondary' size={20} /> Submitted titles
+                <Link href="/account/shows" className={classes('/account/shows')}>
+                  <IconDeviceTvOld className='text-secondary' size={20} /> Submitted shows
                 </Link>
                 <Text
                   className="p-4 text-red-500 cursor-pointer hover:bg-gray-100 flex gap-2 items-center"
@@ -43,7 +43,7 @@ export default function AccountLayout({ children, title }) {
             </div>
           </div>
           <div className='w-full pl-10'>
-            <Text className='text-2xl font-semibold text-gray-700 mb-10'>{title}</Text>
+            <Text className='text-2xl font-semibold text-gray-700 mb-10'>{show}</Text>
             {children}
           </div>
         </div>

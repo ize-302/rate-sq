@@ -17,7 +17,7 @@ export default function AccountPage() {
   });
 
   return (
-    <AccountLayout title='My account'>
+    <AccountLayout show='My account'>
       <form className='max-w-md' onSubmit={form.onSubmit((values) => updateProfile(values))}>
         <TextInput
           placeholder="Display name"

@@ -20,7 +20,7 @@ export default function AccountRatingsPage() {
 
 
   return (
-    <AccountLayout title='My ratings'>
+    <AccountLayout show='My ratings'>
       <div className='grid gap-4'>
         {loading && Array(5).fill(0).map((_, i) => (
           <div className='flex gap-4 mb-2' key={i}>
