@@ -4,7 +4,7 @@ import "@/styles/custom.scss";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { RouterTransition } from "@/components/RouterTransition";
-import TitleProvider from "@/context/titleContext";
+import ShowProvider from "@/context/showContext";
 import UserProvider from "@/context/userContext";
 import DrawerProvider from "@/context/drawerContext";
 import RatingProvider from "@/context/ratingContext";
@@ -20,13 +20,13 @@ export default function App({ Component, pageProps }) {
       <RouterTransition />
       <Notifications position="top-center" containerWidth={350} />
       <UserProvider>
-        <TitleProvider>
+        <ShowProvider>
           <RatingProvider>
             <DrawerProvider>
               <Component {...pageProps} />
             </DrawerProvider>
           </RatingProvider>
-        </TitleProvider>
+        </ShowProvider>
       </UserProvider>
     </MantineProvider>
   );

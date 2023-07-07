@@ -1,17 +1,17 @@
 import React from 'react'
 import { Text } from '@mantine/core';
 import { useRouter } from 'next/router';
-import { TitlesList } from './shared/TitlesList';
-import { TitleContext } from '@/context/titleContext';
+import { ShowsList } from './shared/ShowsList';
+import { ShowContext } from '@/context/showContext';
 import { PaginationComponent } from './shared/PaginationComponent';
 
 export const NewlyAdded = () => {
   const router = useRouter()
-  const { fetchTitles, data, setdata, setloading, loading } = React.useContext(TitleContext)
+  const { fetchShows, data, setdata, setloading, loading } = React.useContext(ShowContext)
 
   React.useEffect(() => {
     setloading(true)
-    fetchTitles()
+    fetchShows()
     return () => {
       setdata({})
     }
@@ -21,7 +21,7 @@ export const NewlyAdded = () => {
     <div>
       <Text className='text-center text-xl md:text-2xl mb-10'>Newly Added</Text>
 
-      <TitlesList loading={loading} titles={data.items} />
+      <ShowsList loading={loading} shows={data.items} />
 
       <PaginationComponent data={data} />
 

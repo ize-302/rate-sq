@@ -18,8 +18,8 @@ export function Navigation({ user }) {
         }
       >
         <Group className='flex flex-col gap-0 items-center cursor-pointer' onClick={() => router.push('/')}>
-          <p className='m-0 font-semibold text-xl text-secondary'>RateTSQ</p>
-          <Rating defaultValue={5} className='m-0' size='sm' color='#6FDA86' />
+          <p className='m-0 font-semibold text-xl text-secondary'>RateSQ</p>
+          <Rating defaultValue={5} className='m-0' size='xs' color='#6FDA86' />
         </Group>
         <div className='hidden md:block'>
           {!user ? (

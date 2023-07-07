@@ -23,7 +23,7 @@ export const HeroSection = ({ heading }) => {
         <div className='flex flex-col justify-center h-full'>
 
           <Text className='text-white text-2xl mb-4 md:mb-1 text-center'>
-            Find your favourite tv shows and rate their title. Explore now.</Text>
+            Find your favourite tv shows and rate their show. Explore now.</Text>
 
           <form className='flex flex-col md:flex-row items-center  pl-5 mt-2 gap-3 md:gap-0' onSubmit={form.onSubmit((values) => router.push({
             pathname: 'search',
@@ -38,7 +38,6 @@ export const HeroSection = ({ heading }) => {
             />
             <Button type='submit' style={{ height: '50px' }} className='block w-[200px]  bg-primary border-0 rounded-full md:rounded-l-none md:rounded-r-full'>Search</Button>
           </form>
-          <Text size='xs' color='gray' className='text-center mt-5'>Powered by <a target="_blank" href="https://themoviedb.org">themoviedb.org</a></Text>
         </div>
       </Container>
     </div>

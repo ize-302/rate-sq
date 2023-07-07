@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Group, Text, Rating, Textarea, Accordion } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
-import { TitleContext } from '@/context/titleContext';
+import { ShowContext } from '@/context/showContext';
 import { UserContext } from '@/context/userContext';
 import axios from 'axios';
 import { getTokenFromCookies } from '@/utils/cookies.utils';
@@ -12,8 +12,8 @@ import { notifications } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { DrawerContext } from '@/context/drawerContext';
 
-export const RateTitle = () => {
-  const { item, fetchTitles, handleSearch } = React.useContext(TitleContext)
+export const RateShow = () => {
+  const { item, fetchShows, handleSearch } = React.useContext(ShowContext)
   const { close } = React.useContext(DrawerContext)
   const { user } = React.useContext(UserContext)
   const token = getTokenFromCookies(ACCESS_TOKEN)
@@ -34,7 +34,7 @@ export const RateTitle = () => {
 
   React.useEffect(() => {
     setloading(true)
-    axios.get(`/api/v1/titles/${item.id}/user-has-rated?user_id=${user?.id}`).then(response => {
+    axios.get(`/api/v1/shows/${item.id}/user-has-rated?user_id=${user?.id}`).then(response => {
       setis_rated(response.data.israted)
       setloading(false)
     }).catch(err => {
@@ -49,7 +49,7 @@ export const RateTitle = () => {
 
   const handlerating = (values) => {
     setloading(true)
-    axios.post(`/api/v1/titles/${item?.id}/ratings`, {
+    axios.post(`/api/v1/shows/${item?.id}/ratings`, {
       rating: values.rating,
       comment: values.comment
     }, {
@@ -58,7 +58,7 @@ export const RateTitle = () => {
       }
     }).then(response => {
       setloading(false)
-      router?.pathname === '/search' ? handleSearch(query) : fetchTitles()
+      router?.pathname === '/search' ? handleSearch(query) : fetchShows()
       close()
       notifications.show({
         title: response.data.success,
@@ -75,7 +75,7 @@ export const RateTitle = () => {
   return (
     <>
       {is_rated && (
-        <div className='bg-blue-50 border border-blue-400 text-blue-400 p-3 rounded-md mt-4'>You have already rated this title</div>
+        <div className='bg-blue-50 border border-blue-400 text-blue-400 p-3 rounded-md mt-4'>You have already rated this show</div>
       )}
       {!is_rated && (
         <Accordion defaultValue="customization">

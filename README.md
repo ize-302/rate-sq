@@ -1,7 +1,18 @@
-# <center>OST-API
+# RateSQ
 
-### <center> [![codecov](https://codecov.io/gh/ize-302/ost-api/branch/master/graph/badge.svg?token=BQ116RI0Q2)](https://codecov.io/gh/ize-302/ost-api)
+Web app for rating opening sequence of tv shows
 
-## Introduction
+### [![codecov](https://codecov.io/gh/ize-302/ost-api/branch/master/graph/badge.svg?token=BQ116RI0Q2)](https://codecov.io/gh/ize-302/ost-api)
 
-This is an open-source project for rating OSTs (Original Soundtracks) of movies, tv shows, games etc 🔥 🔥 🔥 🌟
+#### Tech Stack
+
+- [NextJS](https://nextjs.org/)
+- PostgreSQL with ([NeonDB](https://neon.tech))
+- [Jest](https://jestjs.io/) for testing
+- [TailwindCSS](https://tailwindcss.com) & [Mantine](https://mantine.dev/)
+- Hosted on [Vercel](https://vercel.com)
+- TV shows powered by [TMDB](https://themoviedb.org/)
+
+#### Database Structure / Relationship
+
+![Alt text](image-2.png)
