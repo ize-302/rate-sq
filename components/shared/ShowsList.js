@@ -30,13 +30,13 @@ const Item = ({ item, setdraweritem }) => {
   )
 }
 
-export const ShowsList = ({ loading, shows, cols_class = 'grid-cols-5' }) => {
+export const ShowsList = ({ loading, shows, cols_class = 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5' }) => {
   const { setitem } = React.useContext(ShowContext)
   const { open } = React.useContext(DrawerContext)
 
   return (
     <>
-      <div className={`grid ${cols_class} gap-10`}>
+      <div className={`grid grid-cols-1 ${cols_class} gap-10`}>
         <ShowDrawer />
 
         {!loading && shows?.map((item, index) => (

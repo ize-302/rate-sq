@@ -20,8 +20,8 @@ export default function AccountLayout({ children, title }) {
   return (
     <Layout>
       <Container>
-        <div className='flex w-full my-10 relative'>
-          <div className='w-2/6'>
+        <div className='flex flex-col lg:flex-row w-full my-10 relative'>
+          <div className='lg:w-2/6 mb-5'>
             <div className='border  sticky top-0'>
               <div className="space-y-2 font-medium">
                 <Link href="/account" className={classes('/account')}>
@@ -42,7 +42,7 @@ export default function AccountLayout({ children, title }) {
               </div>
             </div>
           </div>
-          <div className='w-full pl-10'>
+          <div className='w-full lg:pl-10'>
             <Text className='text-2xl font-semibold text-gray-700 mb-10'>{title}</Text>
             {children}
           </div>
