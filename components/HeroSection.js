@@ -38,7 +38,6 @@ export const HeroSection = ({ heading }) => {
             />
             <Button type='submit' style={{ height: '50px' }} className='block w-[200px]  bg-primary border-0 rounded-full md:rounded-l-none md:rounded-r-full'>Search</Button>
           </form>
-          <Text size='xs' color='gray' className='text-center mt-5'>Powered by <a target="_blank" href="https://themoviedb.org">themoviedb.org</a></Text>
         </div>
       </Container>
     </div>

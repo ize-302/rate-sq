@@ -36,6 +36,7 @@ export default function Layout({ children }) {
           <Rating defaultValue={5} className='m-0' size='xs' color='#fff' />
         </Group>
         <Text color='white' size='sm' className='mt-10'>Built with 🔥  by <a className='underline' target="_blank" href="https://github.com/ize-302">Adavize Hassan</a></Text>
+        <Text size='xs' color='gray' className='text-center mt-5'>Powered by <a target="_blank" href="https://themoviedb.org">TMDB</a></Text>
       </div>
     </div>
   )
