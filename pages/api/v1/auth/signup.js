@@ -1,6 +1,6 @@
+import sql from '@/neondb';
 import bcrypt from 'bcrypt'
 import { v4 as uuidv4 } from 'uuid';
-import sql from "@/neon";
 
 export default async function signupHandler(
   req,

@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/utils/constants";
 import { generateToken } from "@/utils/jwt.utils";
 import bcrypt from 'bcrypt'
-import sql from "@/neon";
+import sql from "@/neondb";
 
 export default async function loginHandler(
   req,

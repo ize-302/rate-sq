@@ -1,4 +1,4 @@
-import { fillTitleData } from '@/utils'
+import { fillTitleData } from '@/pages/api/v1/utils'
 import axios from 'axios'
 
 export default async function filmSearchHandler(

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Group, Text, Rating, Textarea, Accordion, Blockquote } from '@mantine/core';
+import { Button, Group, Text, Rating, Textarea, Accordion } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
 import { TitleContext } from '@/context/titleContext';
@@ -11,7 +11,6 @@ import { IconCheck } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { DrawerContext } from '@/context/drawerContext';
-import { supabase } from '@/supabase';
 
 export const RateTitle = () => {
   const { item, fetchTitles, handleSearch } = React.useContext(TitleContext)
@@ -33,17 +32,19 @@ export const RateTitle = () => {
     },
   });
 
-  const isRated = async () => {
-    const result = await supabase.from('ratings').select("*", { count: 'exact' }).eq('author', user.id).eq('show_id', item.id)
-    setis_rated(result.count ? true : false)
-  }
-
   React.useEffect(() => {
-    isRated()
+    setloading(true)
+    axios.get(`/api/v1/titles/${item.id}/user-has-rated?user_id=${user?.id}`).then(response => {
+      setis_rated(response.data.israted)
+      setloading(false)
+    }).catch(err => {
+      setloading(false)
+      console.log(err)
+    })
     return () => {
       setis_rated(false)
     }
-  }, [item])
+  }, [item, user])
 
 
   const handlerating = (values) => {

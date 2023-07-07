@@ -1,4 +1,3 @@
-import { fillRatingData } from "@/utils";
 import * as React from "react";
 import axios from "axios";
 import { useRouter } from "next/router";

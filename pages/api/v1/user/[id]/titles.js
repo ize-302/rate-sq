@@ -1,5 +1,6 @@
-import { supabase } from "@/supabase";
-import { fillTitleData, getPagination, paginator } from "@/utils";
+import sql from "@/neondb";
+import { getPagination, paginator } from "@/utils";
+import { fillTitleData } from "@/pages/api/v1/utils";
 
 export default async function userTitlesHandler(
   req,
@@ -12,15 +13,11 @@ export default async function userTitlesHandler(
     const { id } = req.query
 
     try {
-      const foundtitles = await supabase
-        .from("titles")
-        .select("*", { count: "exact" }).eq("added_by", id)
-        .order("created_at", { ascending: false })
-        .range(from, to)
-      const results = await fillTitleData({ data: foundtitles.data })
+      const titles = await sql`SELECT * FROM titles WHERE added_by=${id} ORDER BY created_at desc OFFSET ${from} LIMIT ${to}`
+      const results = await fillTitleData({ data: titles })
       return await res.status(200).send({
         items: results,
-        ...paginator({ count: foundtitles.count, page, per_page, from, to })
+        ...paginator({ count: titles.length, page, per_page, from, to })
       })
     } catch (error) {
       console.log(error)
