@@ -26,7 +26,7 @@ export default function Search() {
       <Container>
         <div className='w-full my-10 grid gap-10'>
           <div>
-            <Text className='pb-1 text-2xl mb-5'>Search result for '<b>{query}</b>'</Text>
+            <Text className='pb-1 text-2xl mb-5'>Search result for &apos;<b>{query}</b>&apos;</Text>
             <TitlesList loading={loading} titles={searchresults} />
           </div>
         </div>
