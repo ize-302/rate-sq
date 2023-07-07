@@ -18,7 +18,7 @@ export default function Search() {
     return () => {
       setsearchresults([])
     }
-  }, [query])
+  }, [query]) // eslint-disable-line
 
   return (
     <Layout>

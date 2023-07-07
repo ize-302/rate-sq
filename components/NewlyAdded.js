@@ -15,7 +15,7 @@ export const NewlyAdded = () => {
     return () => {
       setdata({})
     }
-  }, [router])
+  }, [router]) // eslint-disable-line
 
   return (
     <div>
