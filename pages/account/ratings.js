@@ -12,10 +12,11 @@ export default function AccountRatingsPage() {
   const { user } = React.useContext(UserContext)
   const router = useRouter()
 
+
   React.useEffect(() => {
     setloading(true)
     fetchUserRatings(user?.id)
-  }, [router, user.id])
+  }, [router.pathname])
 
 
   return (

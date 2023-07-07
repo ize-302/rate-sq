@@ -37,8 +37,7 @@ export default async function titlesHandler(
       }
 
       await supabase.from('titles').insert([
-        { embed_code, id, name, added_by: isAuthorized.id }
-
+        { embed_code, id, name, added_by: isAuthorized?.id }
       ]).select("*")
         .single();
       if (id === 'test-id') {

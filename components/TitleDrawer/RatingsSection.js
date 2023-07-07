@@ -15,7 +15,7 @@ export const RatingsSection = () => {
 
   return (
     <div className='mt-5 flex flex-col gap-3'>
-      <Text className='text-lg font-bold'>Ratings:</Text>
+      <Text className='text-lg font-bold'>More Ratings:</Text>
       {loadingratings ? (
         <>
           {Array(4).fill(0).map((_, i) => (
