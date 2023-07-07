@@ -19,7 +19,7 @@ export default function Layout({ children }) {
     return () => {
       setuser({})
     }
-  }, [token])
+  }, [token]) // eslint-disable-line
 
 
   return (

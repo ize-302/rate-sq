@@ -14,7 +14,7 @@ export default function AccountTitlesPage() {
   React.useEffect(() => {
     setloading(true)
     fetchUserTitles(user.id)
-  }, [router])
+  }, [router]) // eslint-disable-line
 
   return (
     <AccountLayout title='Submitted titles'>

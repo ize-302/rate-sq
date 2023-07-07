@@ -21,7 +21,7 @@ export function RouterTransition() {
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
-  }, [router.asPath]);
+  }, [router.asPath]); // eslint-disable-line
 
   return <NavigationProgress color="#6FDA86" autoReset={true} />;
 }

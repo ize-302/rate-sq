@@ -11,7 +11,7 @@ export const RatingsSection = () => {
     fetchTitleRatings(item.id)
     return () => {
     }
-  }, [item])
+  }, [item]) // eslint-disable-line
 
   return (
     <div className='mt-5 flex flex-col gap-3'>

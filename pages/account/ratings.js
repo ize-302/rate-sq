@@ -16,7 +16,7 @@ export default function AccountRatingsPage() {
   React.useEffect(() => {
     setloading(true)
     fetchUserRatings(user?.id)
-  }, [router.pathname])
+  }, [router.pathname]) // eslint-disable-line
 
 
   return (
