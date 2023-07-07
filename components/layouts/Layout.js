@@ -32,8 +32,8 @@ export default function Layout({ children }) {
       </div>
       <div className='bg-secondary border-t text-center flex items-center flex-col py-10'>
         <Group className='flex flex-col gap-[0px] items-center'>
-          <Text className='m-0 font-semibold text-xl' color='#fff'>RateTSQ</Text>
-          <Rating defaultValue={5} className='m-0' size='sm' color='#fff' />
+          <Text className='m-0 font-semibold text-xl' color='#fff'>RateSQ</Text>
+          <Rating defaultValue={5} className='m-0' size='xs' color='#fff' />
         </Group>
         <Text color='white' size='sm' className='mt-10'>Built with 🔥  by <a className='underline' target="_blank" href="https://github.com/ize-302">Adavize Hassan</a></Text>
       </div>
