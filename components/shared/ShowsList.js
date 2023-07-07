@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Skeleton } from '@mantine/core'
+import { Avatar, Skeleton, Text } from '@mantine/core'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
 import { ShowDrawer } from '../ShowDrawer'
@@ -18,7 +18,7 @@ const Item = ({ item, setdraweritem }) => {
               {!item.ratings ? (
                 <>No rating yet</>
               ) : (
-                <> {item.ratings} / 5</>
+                <Text className='text-2xl border-b-4 border-primary'> {parseFloat(item.ratings).toFixed(1)}</Text>
               )}
             </div>
           </div>
