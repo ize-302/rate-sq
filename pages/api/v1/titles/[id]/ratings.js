@@ -1,6 +1,7 @@
-import { supabase } from "@/supabase";
-import { fillRatingData } from "@/utils";
 import { handleTokenVerification } from "@/utils/jwt.utils";
+import { fillRatingData } from '@/pages/api/v1/utils'
+import sql from "@/neondb";
+import { v4 as uuidv4 } from 'uuid';
 
 export default async function titleRatingsHandler(
   req,
@@ -10,12 +11,8 @@ export default async function titleRatingsHandler(
 
   if (req.method === 'GET') {
     try {
-      const foundratings = await supabase
-        .from("ratings")
-        .select("*", { count: "exact" })
-        .eq("show_id", id)
-        .order("updated_at", { ascending: false })
-      const result = await fillRatingData({ data: foundratings.data })
+      const ratings = await sql`SELECT * FROM ratings WHERE show_id=${id} ORDER BY updated_at desc`
+      const result = await fillRatingData({ data: ratings })
       return await res.status(200).send({
         items: result
       })
@@ -33,14 +30,12 @@ export default async function titleRatingsHandler(
         return res.status(400).send({ error: 'Required fields missing' })
       }
 
-      await supabase.from('ratings').insert([
-        { rating: Number(rating), show_id: Number(id), comment, author: isAuthorized?.id }
-      ]).select("*")
-        .single();
-      // delete test data
+      const uid = await uuidv4() // generate id for rating
+      await sql`INSERT INTO ratings (id, rating, show_id, comment, author) VALUES (${uid}, ${Number(rating)}, ${Number(id)}, ${comment}, ${isAuthorized.id})`
+
+      // deletes title ratings created during test
       if (id === 1) {
-        await supabase.from('ratings').delete().eq("show_id", id)
-          .single();
+        await sql`DELETE FROM ratings WHERE show_id = ${id}`
       }
       return res.status(201).send({ success: 'Rating successfully added' })
     } catch (error) {

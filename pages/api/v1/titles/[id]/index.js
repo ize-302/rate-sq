@@ -1,5 +1,5 @@
-import { supabase } from "@/supabase";
-import { fillTitleData } from "@/utils";
+import sql from "@/neondb";
+import { fillTitleData } from "@/pages/api/v1/utils";
 
 export default async function titleHandler(
   req,
@@ -8,13 +8,9 @@ export default async function titleHandler(
   if (req.method === 'GET') {
     const { id } = req.query
     try {
-      const foundtitle = await supabase
-        .from("titles")
-        .select()
-        .eq("id", id)
-        .single();
-      if (foundtitle.error) return res.status(404).send({ error: 'Title not found' })
-      const result = await fillTitleData({ data: [foundtitle.data] })
+      const titles = await sql`SELECT * FROM titles WHERE id = ${id}`;
+      if (titles.length === 0) return res.status(404).send({ error: 'Title not found' })
+      const result = await fillTitleData({ data: titles })
       return res.status(200).send(result[0])
     } catch (error) {
       console.log(error)

@@ -1,5 +1,6 @@
-import { supabase } from "@/supabase";
-import { fillRatingData, getPagination, paginator } from "@/utils";
+import sql from "@/neondb";
+import { getPagination, paginator } from "@/utils";
+import { fillRatingData } from '@/pages/api/v1/utils'
 
 export default async function userRatingsHandler(
   req,
@@ -12,15 +13,11 @@ export default async function userRatingsHandler(
     const { id } = req.query
 
     try {
-      const foundratings = await supabase
-        .from("ratings")
-        .select("*", { count: "exact" }).eq("author", id)
-        .order("updated_at", { ascending: false })
-        .range(from, to)
-      const result = await fillRatingData({ data: foundratings.data })
+      const ratings = await sql`SELECT * FROM ratings WHERE author=${id} ORDER BY updated_at desc OFFSET ${from} LIMIT ${to}`
+      const result = await fillRatingData({ data: ratings })
       return await res.status(200).send({
         items: result,
-        ...paginator({ count: foundratings.count, page, per_page, from, to })
+        ...paginator({ count: ratings.length, page, per_page, from, to })
       })
     } catch (error) {
       console.log(error)
