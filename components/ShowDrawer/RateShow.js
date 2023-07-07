@@ -74,10 +74,10 @@ export const RateShow = () => {
 
   return (
     <>
-      {user && is_rated && (
+      {!loading && user && is_rated && (
         <div className='bg-blue-50 border border-blue-400 text-blue-400 p-3 rounded-md mt-4'>You have already rated this show</div>
       )}
-      {!is_rated && user && (
+      {!loading && !is_rated && user && (
         <Accordion defaultValue="customization">
           <Accordion.Item value="customization" className='mt-5 bg-green-100 border border-green-400 rounded-lg'>
             <Accordion.Control className='hover:bg-transparent'>
