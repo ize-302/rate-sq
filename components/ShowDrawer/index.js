@@ -13,7 +13,7 @@ export const ShowDrawer = () => {
 
   return (
     <>
-      <Drawer opened={opened} onClose={close} show={(<Text className='text-xl font-semibold'>{item?.name}</Text>)} size={'xl'}
+      <Drawer opened={opened} onClose={close} title={(<Text className='text-xl font-semibold'>{item?.name}</Text>)} size={'xl'}
         position='right'>
         <Media item={item} />
         {item?.exists && (

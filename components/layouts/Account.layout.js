@@ -7,7 +7,7 @@ import { IconDeviceTvOld, IconLogout, IconStars, IconUser } from '@tabler/icons-
 import { removeTokenFromCookies } from '@/utils/cookies.utils'
 import { useRouter } from 'next/router'
 
-export default function AccountLayout({ children, show }) {
+export default function AccountLayout({ children, title }) {
   const router = useRouter()
 
   const signOut = () => {
@@ -43,7 +43,7 @@ export default function AccountLayout({ children, show }) {
             </div>
           </div>
           <div className='w-full pl-10'>
-            <Text className='text-2xl font-semibold text-gray-700 mb-10'>{show}</Text>
+            <Text className='text-2xl font-semibold text-gray-700 mb-10'>{title}</Text>
             {children}
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function AccountShowsPage() {
   }, [router]) // eslint-disable-line
 
   return (
-    <AccountLayout show='Submitted shows'>
+    <AccountLayout title='Submitted shows'>
       <ShowsList cols_class={'grid-cols-4'} loading={loading} shows={usershowsdata.items} />
       <PaginationComponent data={usershowsdata} />
     </AccountLayout>

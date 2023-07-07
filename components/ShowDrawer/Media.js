@@ -54,7 +54,7 @@ export const Media = ({ item }) => {
   return (
     <div>
       {item?.exists && (
-        <iframe className='aspect-video  w-full h-full rounded-md' src={`https://www.youtube.com/embed/${item?.embed_code}?rel=0`} show={item?.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe className='aspect-video  w-full h-full rounded-md' src={`https://www.youtube.com/embed/${item?.embed_code}?rel=0`} title={item?.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       )}
       {!item?.exists && (
         <div>
@@ -67,7 +67,7 @@ export const Media = ({ item }) => {
             <div className='mt-2'>
               Preview:
               {form.values.embed_code && (
-                <iframe className='aspect-video mt-2 w-full h-full rounded-md' src={`https://www.youtube.com/embed/${form.values.embed_code}?rel=0`} show={name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe className='aspect-video mt-2 w-full h-full rounded-md' src={`https://www.youtube.com/embed/${form.values.embed_code}?rel=0`} title={item?.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               )}
             </div>
           </form>
