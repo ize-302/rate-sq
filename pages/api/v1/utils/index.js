@@ -50,7 +50,7 @@ export const fillRatingData = async ({ data }) => {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
         }
       })
-      const profiles = await sql`SELECT FROM profiles WHERE id=${item.author}`
+      const profiles = await sql`SELECT * FROM profiles WHERE id=${item.author}`
       const data_obj = {
         ...item,
         show: {
