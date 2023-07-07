@@ -13,7 +13,7 @@ export default function AccountShowsPage() {
 
   React.useEffect(() => {
     setloading(true)
-    fetchUserShows(user.id)
+    fetchUserShows(user?.id)
   }, [router]) // eslint-disable-line
 
   return (

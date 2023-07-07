@@ -6,11 +6,13 @@ export async function middleware(request) {
   // return NextResponse.redirect(new URL('/home', request.url))
   const token = await request.cookies.get('access_token')?.value
   const isAuthorized = await verifyToken(token)
-  // console.log('>>', token, isAuthorized)
+  if (!isAuthorized) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
   return
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/',
+  matcher: '/account/:path*',
 }

@@ -2,7 +2,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/utils/constants";
 import { getTokenFromCookies, saveTokenInCookies } from "@/utils/cookies.utils";
 import { verifyToken } from "@/utils/jwt.utils";
 import { notifications } from "@mantine/notifications";
-import { IconCheck } from "@tabler/icons-react";
+import { IconCheck, IconX } from "@tabler/icons-react";
 import axios from "axios";
 import * as React from "react";
 
@@ -44,6 +44,12 @@ const UserProvider = ({
     }).catch(err => {
       setloading(false)
       console.log(err)
+      notifications.show({
+        title: err.response.data.error,
+        message: "",
+        color: "red",
+        icon: <IconX />,
+      });
     })
   }
 
