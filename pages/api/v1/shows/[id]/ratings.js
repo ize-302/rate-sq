@@ -1,5 +1,5 @@
 import { handleTokenVerification } from "@/utils/jwt.utils";
-import { fillRatingData } from '@/pages/api/v1/utils'
+import { fillRatingData } from '@/helpers'
 import sql from "@/neondb";
 import { v4 as uuidv4 } from 'uuid';
 

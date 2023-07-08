@@ -10,6 +10,7 @@ export default async function updateProfileHandler(
     // TODO; FIX issue with generateToken returning null 
     const { display_name } = req.body
     try {
+      if (!display_name) return res.status(400).send({ error: 'Display name cant be empty' })
       const isAuthorized = await handleTokenVerification(req, res)
       if (isAuthorized) {
         const users = await sql`UPDATE profiles SET display_name = ${display_name} WHERE id = ${isAuthorized.id} RETURNING *`

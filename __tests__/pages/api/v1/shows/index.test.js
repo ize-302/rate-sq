@@ -47,4 +47,16 @@ describe('/api/v1/shows', () => {
     );
   })
 
+  it('Return 200 error and list of shows', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+    });
+    await showsHandler(req, res);
+    expect(res._getStatusCode()).toBe(200);
+    expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
+      expect.objectContaining({
+        items: expect.any(Object),
+      }),
+    );
+  })
 });

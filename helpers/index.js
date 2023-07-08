@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+
 import sql from "@/neondb";
 import axios from "axios";
 
