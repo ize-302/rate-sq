@@ -1,6 +1,5 @@
 import sql from "@/neondb";
-import { getPagination, paginator } from "@/utils";
-import { fillRatingData } from '@/helpers'
+import { getPagination, paginator, fillRatingData } from "@/utils";
 import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "@/utils/constants";
 
 export default async function userRatingsHandler(

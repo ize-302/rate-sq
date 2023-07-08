@@ -1,7 +1,7 @@
 import { handleTokenVerification } from "@/utils/jwt.utils";
-import { fillRatingData } from '@/helpers'
 import sql from "@/neondb";
 import { v4 as uuidv4 } from 'uuid';
+import { fillRatingData } from "@/utils";
 
 export default async function showRatingsHandler(
   req,

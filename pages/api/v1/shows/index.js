@@ -1,7 +1,6 @@
 import sql from "@/neondb";
-import { getPagination, paginator } from "@/utils";
+import { getPagination, paginator, fillShowData } from "@/utils";
 import { handleTokenVerification } from "@/utils/jwt.utils";
-import { fillShowData } from '@/helpers'
 import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "@/utils/constants";
 
 export default async function showsHandler(
