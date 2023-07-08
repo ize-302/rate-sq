@@ -50,4 +50,36 @@ describe('/api/v1/shows/:id/ratings', () => {
     );
   })
 
+  it('Returns status code 404 and with error message if show not found', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: {
+        id: 'xxx',
+      }
+    });
+    await showRatingsHandler(req, res);
+    expect(res._getStatusCode()).toBe(404);
+    expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
+      expect.objectContaining({
+        error: expect.any(String),
+      }),
+    );
+  })
+
+  it('Returns status code 200 and list of ratings for a specified show', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: {
+        id: '63247',
+      }
+    });
+    await showRatingsHandler(req, res);
+    expect(res._getStatusCode()).toBe(200);
+    expect(JSON.parse(JSON.stringify(res._getData()))).toEqual(
+      expect.objectContaining({
+        items: expect.any(Array),
+      }),
+    );
+  })
+
 });
