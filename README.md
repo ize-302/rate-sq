@@ -15,4 +15,4 @@ Web app for rating opening sequence of tv shows
 
 #### Database Structure / Relationship
 
-![Alt text](image-2.png)
+![Alt text](image.png)(https://drawsql.app/teams/team-ize/diagrams/rate-sq)
