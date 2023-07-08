@@ -2,7 +2,7 @@
 
 Web app for rating opening sequence of tv shows
 
-### [![codecov](https://codecov.io/gh/ize-302/ost-api/branch/master/graph/badge.svg?token=BQ116RI0Q2)](https://codecov.io/gh/ize-302/ost-api)
+### [![codecov](https://codecov.io/gh/ize-302/rate-sq/branch/master/graph/badge.svg?token=BQ116RI0Q2)](https://codecov.io/gh/ize-302/rate-sq)
 
 #### Tech Stack
 

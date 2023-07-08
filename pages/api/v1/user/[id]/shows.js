@@ -1,6 +1,5 @@
 import sql from "@/neondb";
-import { getPagination, paginator } from "@/utils";
-import { fillShowData } from "@/helpers";
+import { getPagination, paginator, fillShowData } from "@/utils";
 import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "@/utils/constants";
 
 export default async function userShowsHandler(

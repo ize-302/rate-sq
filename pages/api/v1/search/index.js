@@ -1,4 +1,4 @@
-import { fillShowData } from '@/helpers'
+import { fillShowData } from '@/utils'
 import axios from 'axios'
 
 export default async function filmSearchHandler(

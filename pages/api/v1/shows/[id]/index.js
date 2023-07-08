@@ -1,5 +1,5 @@
 import sql from "@/neondb";
-import { fillShowData } from "@/helpers";
+import { fillShowData } from "@/utils";
 
 export default async function showHandler(
   req,
