@@ -1,14 +1,15 @@
 import sql from "@/neondb";
 import { getPagination, paginator } from "@/utils";
-import { fillRatingData } from '@/pages/api/v1/utils'
+import { fillRatingData } from '@/helpers'
+import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "@/utils/constants";
 
 export default async function userRatingsHandler(
   req,
   res
 ) {
   if (req.method === 'GET') {
-    const page = Number(req.query.page)
-    const per_page = Number(req.query.per_page)
+    const page = Number(req.query.page) || DEFAULT_PAGE
+    const per_page = Number(req.query.per_page) || DEFAULT_PER_PAGE
     const { from, to } = getPagination({ page, per_page });
     const { id } = req.query
 

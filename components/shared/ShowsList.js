@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Skeleton } from '@mantine/core'
+import { Avatar, Skeleton, Text } from '@mantine/core'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
 import { ShowDrawer } from '../ShowDrawer'
@@ -18,7 +18,7 @@ const Item = ({ item, setdraweritem }) => {
               {!item.ratings ? (
                 <>No rating yet</>
               ) : (
-                <> {item.ratings} / 5</>
+                <Text className='text-2xl border-b-4 border-primary'> {parseFloat(item.ratings).toFixed(1)}</Text>
               )}
             </div>
           </div>
@@ -30,13 +30,13 @@ const Item = ({ item, setdraweritem }) => {
   )
 }
 
-export const ShowsList = ({ loading, shows, cols_class = 'grid-cols-5' }) => {
+export const ShowsList = ({ loading, shows, cols_class = 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5' }) => {
   const { setitem } = React.useContext(ShowContext)
   const { open } = React.useContext(DrawerContext)
 
   return (
     <>
-      <div className={`grid ${cols_class} gap-10`}>
+      <div className={`grid grid-cols-1 ${cols_class} gap-10`}>
         <ShowDrawer />
 
         {!loading && shows?.map((item, index) => (

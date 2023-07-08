@@ -18,7 +18,7 @@ export default function AccountShowsPage() {
 
   return (
     <AccountLayout title='Submitted shows'>
-      <ShowsList cols_class={'grid-cols-4'} loading={loading} shows={usershowsdata.items} />
+      <ShowsList cols_class={'md:grid-cols-2 lg:grid-cols-4'} loading={loading} shows={usershowsdata.items} />
       <PaginationComponent data={usershowsdata} />
     </AccountLayout>
   )

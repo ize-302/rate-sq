@@ -1,7 +1,7 @@
 import { createMocks } from "node-mocks-http";
 import showRatingsHandler from '@/pages/api/v1/shows/[id]/ratings';
 
-describe('/api/v1/ratings', () => {
+describe('/api/v1/shows/:id/ratings', () => {
   // ADD RATING
   it('Returns 400 status code error and error message when some fields are missing', async () => {
     const { req, res } = createMocks({

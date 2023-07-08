@@ -1,5 +1,5 @@
 {
-  "name": "ost-api",
+  "name": "rate-sq",
   "version": "0.0.2",
   "description": "",
   "main": "index.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ize-302/ost-api.git"
+    "url": "git+https://github.com/ize-302/rate-sq.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ize-302/ost-api/issues"
+    "url": "https://github.com/ize-302/rate-sq/issues"
   },
-  "homepage": "https://github.com/ize-302/ost-api#readme",
+  "homepage": "https://github.com/ize-302/rate-sq#readme",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@mantine/carousel": "^6.0.14",
