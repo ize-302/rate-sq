@@ -24,7 +24,7 @@ const Item = ({ item, setdraweritem }) => {
           </div>
           <Avatar className='rounded-xl bg-secondary h-[340px] relative w-full' src={item?.poster_path ? `https://image.tmdb.org/t/p/original/${item?.poster_path}` : ''} />
         </LazyLoad>
-        <Link href={`/tv/${item.id}`} className='font-semibold mt-2'>{item.name} opening show</Link>
+        <Link href={`/tv/${item.id}`} className='font-semibold mt-2'>{item.name} opening title</Link>
       </div>
     </>
   )

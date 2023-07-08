@@ -7,7 +7,7 @@ import { NewlyAdded } from '@/components/NewlyAdded'
 export default function Home() {
   return (
     <Layout>
-      <HeroSection heading={' Find your favourite tv shows and rate their show. Explore now.'} />
+      <HeroSection heading={' Find your favourite tv shows and rate their title. Explore now.'} />
       <Container>
         <div className='w-full justify-between gap-8 my-20'>
           <NewlyAdded />
