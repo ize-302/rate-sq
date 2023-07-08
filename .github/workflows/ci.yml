@@ -43,3 +43,22 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: true
           verbose: true
+
+      - name: Project versioning
+        uses: paulhatch/semantic-version@v5.0.2
+        with:
+          # The prefix to use to identify tags
+          tag_prefix: "v"
+          # A string which, if present in a git commit, indicates that a change represents a
+          # major (breaking) change, supports regular expressions wrapped with '/'
+          major_pattern: "(MAJOR)"
+          # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+          minor_pattern: "(MINOR)"
+          # A string to determine the format of the version output
+          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+          # Named version, will be used as suffix for name version tag
+          namespace: my-service
+          # If this is set to true, *every* commit will be treated as a new version.
+          bump_each_commit: false
+          # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
+          search_commit_body: false
