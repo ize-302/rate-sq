@@ -13,7 +13,7 @@ export default async function updateProfileHandler(
       if (!display_name) return res.status(400).send({ error: 'Display name cant be empty' })
       const isAuthorized = await handleTokenVerification(req, res)
       if (isAuthorized) {
-        const users = await sql`UPDATE profiles SET display_name = ${display_name} WHERE id = ${isAuthorized.id} RETURNING *`
+        const users = await sql`UPDATE users SET display_name = ${display_name} WHERE id = ${isAuthorized.id} RETURNING *`
         const access_token = await generateToken(users[0], ACCESS_TOKEN)
         const refresh_token = await generateToken(users[0], REFRESH_TOKEN)
         return res.status(200).send({ refresh_token, access_token })

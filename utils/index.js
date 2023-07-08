@@ -72,7 +72,7 @@ export const fillRatingData = async ({ data }) => {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
         }
       })
-      const profiles = await sql`SELECT * FROM profiles WHERE id=${item.author}`
+      const users = await sql`SELECT * FROM users WHERE id=${item.author}`
       const data_obj = {
         ...item,
         show: {
@@ -81,8 +81,8 @@ export const fillRatingData = async ({ data }) => {
           poster_path: themoviedb_response.data.poster_path,
         },
         author: {
-          id: profiles[0].id,
-          display_name: profiles[0].display_name,
+          id: users[0].id,
+          display_name: users[0].display_name,
         }
       }
       return data_obj
