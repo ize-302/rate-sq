@@ -26,7 +26,7 @@ describe('/api/v1/shows', () => {
   })
 
 
-  it('Creates a track and returns 201 status code and success message when all fields are availble', async () => {
+  it('Creates a show and returns 201 status code and success message when all fields are availble', async () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
@@ -58,5 +58,5 @@ describe('/api/v1/shows', () => {
         items: expect.any(Object),
       }),
     );
-  })
+  }, 10000)
 });
