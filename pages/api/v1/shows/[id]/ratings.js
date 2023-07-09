@@ -15,7 +15,7 @@ export default async function showRatingsHandler(
       if (shows.length === 0) return res.status(404).send({ error: 'Show not found' })
       const ratings = await sql`SELECT * FROM ratings WHERE show_id=${id} ORDER BY updated_at desc`
       const result = await fillRatingData({ data: ratings })
-      return await res.status(200).send({
+      return res.status(200).send({
         items: result
       })
     } catch (error) {

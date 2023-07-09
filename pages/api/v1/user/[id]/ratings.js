@@ -15,7 +15,7 @@ export default async function userRatingsHandler(
     try {
       const ratings = await sql`SELECT * FROM ratings WHERE author=${id} ORDER BY updated_at desc OFFSET ${from} LIMIT ${to}`
       const result = await fillRatingData({ data: ratings })
-      return await res.status(200).send({
+      return res.status(200).send({
         items: result,
         ...paginator({ count: ratings.length, page, per_page, from, to })
       })

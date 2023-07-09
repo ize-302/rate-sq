@@ -15,7 +15,7 @@ export default async function showsHandler(
     try {
       const foundshows = await sql`SELECT * FROM shows ORDER BY created_at desc OFFSET ${from} LIMIT ${to}`
       const results = await fillShowData({ data: foundshows })
-      return await res.status(200).send({
+      return res.status(200).send({
         items: results,
         ...paginator({ count: foundshows.count, page, per_page, from, to })
       })
