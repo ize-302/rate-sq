@@ -32,17 +32,21 @@ export const fillShowData = async ({ data }) => {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_THEMOVIEDB_ACCESS_TOKEN}`
         }
       })
-      const ratings = await sql`SELECT * FROM ratings WHERE show_id = ${item.id}`;
       const shows = await sql`SELECT * FROM shows WHERE id = ${item.id}`;
+
+      // we want to calculate the averate rating for a specific show
+      const ratings = await sql`SELECT * FROM ratings WHERE show_id = ${item.id}`;
       let total_responses = 0
       let total_ratings = 0
       let average_rating = 0
+      // since the ratings are between the range 1-5, we iterate within that rang and get the occurence for each rate item
       Array(5).fill(1, 1, 5).map((n, i) => {
         const occurence = ratings.filter(item => Number(item.rating) === i + 1).length
         total_responses = total_responses + occurence
         total_ratings = total_ratings + ((i + 1) * occurence)
       })
       average_rating = Number((total_ratings / total_responses).toFixed(1))
+
       const data_obj = {
         id: themoviedb_response.data.id,
         name: item.name,
@@ -55,7 +59,7 @@ export const fillShowData = async ({ data }) => {
       }
       return data_obj
     })
-  );
+  )
   return result.sort((a, b) => {
     if (b.exists && !a.exists) return 1
     if (!b.exists && a.exists) return -1;
