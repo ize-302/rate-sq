@@ -78,7 +78,7 @@ export const Media = ({ item }) => {
       )}
       {!item?.exists && !user && (
         <div className='flex gap-2 mt-4'>
-          This show hasn't been added. Sign in to add it.
+          This show has&apos;nt been added. Sign in to add it.
           <Link href='/login' className='text-secondary font-bold'>Continute to Log in</Link>
         </div>
       )}
