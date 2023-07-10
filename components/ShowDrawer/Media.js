@@ -1,4 +1,5 @@
 import { ShowContext } from '@/context/showContext';
+import { UserContext } from '@/context/userContext';
 import { ACCESS_TOKEN } from '@/utils/constants';
 import { getTokenFromCookies } from '@/utils/cookies.utils';
 import { Button, TextInput } from '@mantine/core'
@@ -6,6 +7,7 @@ import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons-react';
 import axios from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react'
 
@@ -15,6 +17,7 @@ export const Media = ({ item }) => {
   const { fetchShow, handleSearch } = React.useContext(ShowContext)
   const router = useRouter()
   const { query } = router.query
+  const { user } = React.useContext(UserContext)
 
   const form = useForm({
     initialValues: {
@@ -56,7 +59,7 @@ export const Media = ({ item }) => {
       {item?.exists && (
         <iframe className='aspect-video  w-full h-full rounded-md' src={`https://www.youtube.com/embed/${item?.embed_code}?rel=0`} title={item?.name} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       )}
-      {!item?.exists && (
+      {!item?.exists && user && (
         <div>
           <form className='grid gap-2' onSubmit={form.onSubmit((values) => handlesubmission(values))} >
             <TextInput
@@ -71,6 +74,12 @@ export const Media = ({ item }) => {
               )}
             </div>
           </form>
+        </div>
+      )}
+      {!item?.exists && !user && (
+        <div className='flex gap-2 mt-4'>
+          This show hasn't been added. Sign in to add it.
+          <Link href='/login' className='text-secondary font-bold'>Continute to Log in</Link>
         </div>
       )}
     </div>
